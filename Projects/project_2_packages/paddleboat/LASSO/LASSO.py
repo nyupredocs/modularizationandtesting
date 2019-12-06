@@ -68,6 +68,22 @@ def get_loss_function(SSE, lambda, betas):
     print("Working!")
     return loss_function
 
+def get_coefficients_given_lambda(lambda):
+    return(coefficients)
+
+def pick_lowest_lamda():
+    lambdas = [1,10]
+    losses = list(length(lambda))
+    for lambda in lambdas:
+        loss = loss_function(lambda)
+        list.append(loss)
+    min_loss = min(losses)
+    lowest_lambda = loss(min_loss_position_in_list)
+    return(lowest_lambda)
+
+
+    loss_values = loss_function(lambda)
+
 def main():
     """Performs OLS, prints output to table"""
     print("Working!")
