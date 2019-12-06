@@ -1,16 +1,17 @@
 def ols(y, X):
     """
     This is THE BEST ols.
-    
-    Arg: 
+
+    Parameters:
+    -----------
         y - N by 1 response vector
         X - N by K covariate matrix
-    Ret:
-        β - OLS coefficients
+    Returns:
+    --------
+        beta - OLS coefficients
         se - standard errors of the coefficients
     """
-    
-    
+
     XpX = X.T@X
     Xpy = X.T@y
     β = scipy.linalg.inv(XpX)@Xpy

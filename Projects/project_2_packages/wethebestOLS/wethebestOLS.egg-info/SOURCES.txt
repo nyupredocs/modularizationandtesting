@@ -1,0 +1,6 @@
+README.md
+setup.py
+wethebestOLS.egg-info/PKG-INFO
+wethebestOLS.egg-info/SOURCES.txt
+wethebestOLS.egg-info/dependency_links.txt
+wethebestOLS.egg-info/top_level.txt
