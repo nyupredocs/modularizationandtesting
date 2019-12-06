@@ -4,28 +4,34 @@ def ols(y, X):
 
     Parameters
     ----------
-    y :
+    y : np.array((N, 1), float64)
         N by 1 response vector
-    X :
+    X : np.array((N, K), float64)
         N by K covariate matrix
-
 
     Returns
     -------
-    beta :
+    beta : np.array((K, 1), float64)
         OLS coefficients
-    se :
+    se : np.array((K, 1), float64)
         standard errors of the coefficients
     """
 
+    # Solve for beta hat
     XpX = X.T@X
     Xpy = X.T@y
     β = scipy.linalg.inv(XpX)@Xpy
-    N = X.shape[0]
+
+    # Calculate mean squared error
     pred = X@β
     resid = y - pred
     sse = sum(resid**2)[0]
+    N = X.shape[0]
     mean_sse = sse/(N - 1)
+
+    # Calculate vcv matrix for beta
     σ2 = mean_sse*scipy.linalg.inv(XpX)
+    # Extract SEs from the diagnal
     se = np.sqrt(np.diag(σ2))
+
     return β, se
