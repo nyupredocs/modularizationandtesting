@@ -1,57 +1,133 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
+import math
+import scipy
+np.set_printoptions(suppress=True)
 
-def get_betas(X, Y):
-    """Get betas (according to OLS formula)"""
-    betas = (transpose(X) * X)^(-1) * (transpose(X) * Y) # transpose is not a real function
+# Function computing a least squares fit
+def beta_ols(Y, X):
+	'''
+        Estimate OLS coefficients
 
-    print("Working!")
-    return betas
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix
 
-def get_residuals(betas, X, Y):
-    """Get residuals (according to OLS formula)"""
-    y_hat = betas * X
-    residuals = Y - y_hat
+        Returns
+        -------
+        beta_hat : vector of coefficients
+        '''
 
-    print("Working!")
-    return residuals
-
-def get_n(X, Y):
-    """Get N, check independent vs dependent variables"""
-    n_X = length(X)
-    n_Y = length(Y)
-
-    if n_X == n_Y:
-        n = n_X
+    if len(Y.shape) != 1:
+        return print('ERROR: Y must be an Nx1 matrix')
+    elif Y.shape[0] != X.shape[0]:
+        return print('ERROR: Y and X must have the same number of observations')
     else:
-        print("Error!")
+        left = X.transpose().dot(X).values
+        right = X.transpose().dot(Y).values
+        beta_hat = np.linalg.inv(left).dot(right)
+        return beta_hat
 
-    print("Working!")
-    return n
 
-def get_ses(residuals, X, Y):
-    """Get SEs (according to OLS formula)"""
-    residuals2 = residuals^2
-    XX = (transpose(X) * X)^(-1) # transpose is not a real function
-    N = get_n(X, Y)
-    ses = (residuals2 / (N-1)) * XX
+def resids(Y, X):
+		'''
+        Estimate OLS residuals
 
-    print("Working!")
-    return ses
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix
 
-def get_r2(Y, X, betas):
-    """Get R^2"""
-    y_hat = X * betas
-    y_bar = mean(y)
+        Returns
+        -------
+        e : vector of residuals
+        '''
+    e = beta_ols(Y,X).dot(X.values.T)-Y
+    return e
+
+
+def Sigma(Y,X):
+		'''
+        Estimate OLS variance-covariance matrix
+
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix
+
+        Returns
+        -------
+        e : var-cov matrix as pandas df
+        '''
+    e = resids(Y,X)
+    std_hat = e.dot(e.T)/(X.shape[0]-X.shape[1])
+    Sigma = std_hat*np.linalg.inv(X.transpose().dot(X).values)
+    return pd.DataFrame(Sigma)
+
+def variance_ols(Y,X):
+    	'''
+        Estimate OLS variance-covariance matrix
+
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix
+
+        Returns
+        -------
+        var : variance of coefficients
+        '''
+    diags = np.diagonal(Sigma(Y, X))
+    var = np.sqrt(diags)
+    return var
+
+
+def r2_ols(Y, X):
+        '''
+        Estimate R^2 for OLS
+
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix
+
+        Returns
+        -------
+        R2 : value of R^2 
+        '''
+
+    y_hat = beta_ols(Y,X).dot(X.values.T)
+    y_bar = np.mean(y)
     
-    SSR = sum((y_hat - y_bar)^2)
-    SST = sum((y - y_bar)^2)
+    SSR = np.sum((y_hat - y_bar)**2)
+    SST = np.sum((y - y_bar)**2)
 
     r2 = SSR / SST
-
-    print("Working!")
     return r2
 
-def main():
-    """Performs OLS, prints output to table"""
-    print("Working!")
+def least_sq(Y, X):
+        '''
+        Output nicely OLS results
+
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix
+
+        Returns
+        -------
+        R2 : value of R^2 
+        '''
+    
+    print('Coefficients = ', beta_ols(Y, X))
+    print('Coeff. SErrs = ', np.sqrt(np.diagonal(Sigma(Y,X))))
+    print('')
+    print('95% Confidence Interval for Coefficients')
+    print('     Lower Bound:', beta_ols(Y, X) - 1.96*np.sqrt(np.diagonal(Sigma(Y,X))))
+    print('     Upper Bound:', beta_ols(Y, X) + 1.96*np.sqrt(np.diagonal(Sigma(Y,X))))
+    print('')
+    print('R-Squared:', r2_ols(Y,X))
+    print('')
+    print("Variance-Covariance Matrix:")
+    return Sigma(Y,X)
