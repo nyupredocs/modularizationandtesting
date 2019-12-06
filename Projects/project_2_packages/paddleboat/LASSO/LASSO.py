@@ -54,35 +54,34 @@ def get_r2(Y, X, betas):
 
 def get_sse(Y, X, betas):
     """Get sum of squared errors"""
-    y_hat = X * beta
+    y_hat = X * betas
     sse = (Y - y_hat) ** 2
 
     print("Working!")
     return sse
 
-def get_loss_function(SSE, lambda, betas):
+def get_loss_function(SSE, lamb, betas):
     """Get loss function"""
     betas_without_intercept = betas[1:length(betas)]
-    loss_function = SSE + lambda * sum(abs(betas_without_intercept))
+    loss_function = SSE + lamb * sum(abs(betas_without_intercept))
 
     print("Working!")
     return loss_function
 
-def get_coefficients_given_lambda(lambda):
+def get_coefficients_given_lamb(lamb):
     return(coefficients)
 
 def pick_lowest_lamda():
-    lambdas = [1,10]
-    losses = list(length(lambda))
-    for lambda in lambdas:
-        loss = loss_function(lambda)
+    lambs = [1,10]
+    losses = list(length(lamb))
+    for lamb in lambs:
+        loss = loss_function(lamb)
         list.append(loss)
     min_loss = min(losses)
-    lowest_lambda = loss(min_loss_position_in_list)
-    return(lowest_lambda)
+    lowest_lamb = loss(min_loss_position_in_list)
+    return(lowest_lamb)
 
-
-    loss_values = loss_function(lambda)
+    loss_values = loss_function(lamb)
 
 def main():
     """Performs OLS, prints output to table"""
