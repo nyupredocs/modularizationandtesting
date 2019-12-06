@@ -78,7 +78,7 @@ def estimate_beta_iv(a, b, c, nocons=""):
         print("_cons: " + str(cons))
         for i in range(0, len(betas)):
             print("beta_"+ str(i) + " :" + str(betas[i]))
-    else if nocons == "nocons":
+    else nocons == "nocons":
         betas = betas_all[0:]    
         for i in range(0, len(betas)):
             print("beta_"+ str(i) + " :" + str(betas[i]))
