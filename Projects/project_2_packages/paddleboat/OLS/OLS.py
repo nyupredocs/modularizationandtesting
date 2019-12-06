@@ -39,6 +39,18 @@ def get_ses(residuals, X, Y):
     print("Working!")
     return ses
 
+def get_r2(Y, X, betas):
+    """Get R^2"""
+    y_hat = X * betas
+    y_bar = mean(y)
+    
+    SSR = sum((y_hat - y_bar)^2)
+    SST = sum((y - y_bar)^2)
+
+    r2 = SSR / SST
+
+    print("Working!")
+    return r2
 
 def main():
     """Performs OLS, prints output to table"""
