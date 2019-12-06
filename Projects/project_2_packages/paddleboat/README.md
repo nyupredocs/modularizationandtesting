@@ -8,4 +8,4 @@ Implements OLS.
 
 ## Team members
 
-Nadav, Harriet, Casey and Joel.
+Nadav Tadelis, Harriet Jeon, Casey McQuillan and Joel Becker.
