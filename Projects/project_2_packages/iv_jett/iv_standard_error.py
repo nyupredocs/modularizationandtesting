@@ -8,7 +8,7 @@ def calculate_sigma(Z, X, Y, beta_iv):
 
     sigma_iv = (1/N) * np.transpose(resid) @ resid
 
-    return sigma_iv
+    return np.sqrt(sigma_iv)
 
 
 
