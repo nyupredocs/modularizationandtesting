@@ -1,0 +1,25 @@
+# .readthedocs.yml
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+# Required (specified which configuration version you're using)
+version: 2
+
+# Specify where the sphinx build stuff is
+sphinx:
+    builder: html
+    configuration: Projects/project_2_packages/wethebestOLS/docs/conf.py
+    fail_on_warning: true
+
+# Which build formats do we want
+formats:
+    - htmlzip
+    - pdf
+
+python:
+    version: 3.7
+    install:
+        - requirements: requirements.txt
+        - method: pip
+          path: .
+    system_packages: true
