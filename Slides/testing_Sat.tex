@@ -15,18 +15,26 @@
   \usepackage{listings}
   \lstset{language=Python, basicstyle=\footnotesize}
 
-  % Layout
-  \usepackage{multicol}
+  % Misc packages
+  \usepackage{hyperref}
+  \hypersetup{colorlinks=true,linkcolor=,urlcolor=blue}
 
   % Colors
   \definecolor{myblue}{RGB}{25,98,148}
   \definecolor{mygray}{RGB}{66,66,66}
 
   % Theme Settings
-  \usetheme{metropolis}
+  \usetheme[subsectionpage=progressbar]{metropolis}
+
+  % \setbeamercolor{normal text}{fg=mygray}
+  % \setbeamercolor{alerted text}{fg=myblue}
+  % \setbeamercolor{title text}{fg=mygray}
+  % \setbeamercolor{title separator}{fg=myblue}
+  % \setbeamercolor{progress bar}{fg=myblue}
+  % \setbeamercolor{frametitle}{bg=myblue}
 
 
- \title{Writing Python packages}
+\title{Package testing}
 
 \date[]{\today}
 
@@ -47,7 +55,72 @@
 % ------------------------------ %
 % Unit and integration testing
 % ------------------------------ %
-\section{Unit and integration testing}
+\section{Types of testing}
+
+  \begin{frame} \frametitle{Types of testing: analogy}
+
+    We will describe the different types of testing using the analogy of building a car.
+
+    \vspace{0.25cm}
+
+    Consider a car that consists of four components:
+
+    \begin{enumerate}
+      \item An engine
+      \item An axle
+      \item A frame
+      \item Four wheels
+    \end{enumerate}
+
+  \end{frame}
+
+  \begin{frame} \frametitle{Types of testing: unit testing}
+
+    Unit testing involves testing a single component at a time to make sure that it
+    behaves as you expect in isolation.
+
+    \vspace{0.25cm}
+
+    For example, in our car analogy, we might check whether the engine ran and whether
+    pistons operated at correct frequency, etc\dots
+
+    \vspace{0.25cm}
+
+    What are other examples of unit testing in the context of our car?
+
+  \end{frame}
+
+  \begin{frame} \frametitle{Types of testing: integration testing}
+
+    Integration testing is aimed at ensuring each part works well with the parts that
+    it is intended to interace with.
+
+    \vspace{0.25cm}
+
+    For example, in our car analogy, we might check whether the engine was successfully
+    able to turn the wheels through its connection on the axle.
+
+    \vspace{0.25cm}
+
+    What are other examples of integration testing in the context of our car?
+
+  \end{frame}
+
+  \begin{frame} \frametitle{Types of testing: system testing}
+
+    System testing is aimed at ensuring all parts work well with one another in an
+    environment similar to one that the software might be operated in
+
+    \vspace{0.25cm}
+
+    For example, in our car analogy, this might involve taking some of the cars that
+    are produced for a drive in the parking lot
+
+    \vspace{0.25cm}
+
+    What are other examples of system testing in the context of our car?
+
+  \end{frame}
 
 
 % ------------------------------ %
