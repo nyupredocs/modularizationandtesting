@@ -49,7 +49,7 @@ def estimate_beta_iv(a, b, c, nocons=""):
 
     check_dim(a, b, c)
     if nocons == "":
-        N = a.shape[0] 
+        N = a.shape[0]
         a_1 = np.ones((N,1))
         a = np.hstack((a_1,a))
         b_1 = np.ones((N,1))
@@ -68,9 +68,8 @@ def estimate_beta_iv(a, b, c, nocons=""):
         print("_cons: " + str(cons))
         for i in range(0, len(betas)):
             print("beta_"+ str(i) + " :" + str(betas[i]))
-    else if nocons == "nocons":
-        betas = betas_all[0:]    
+    elif nocons == "nocons":
+        betas = betas_all[0:]
         for i in range(0, len(betas)):
             print("beta_"+ str(i) + " :" + str(betas[i]))
     return betas_all
-
