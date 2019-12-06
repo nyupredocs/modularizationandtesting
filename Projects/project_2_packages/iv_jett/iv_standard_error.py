@@ -13,5 +13,6 @@ def calculate_sigma(Z, X, Y, beta_iv):
 
 
 def calculate_var_beta(sigma, X, Z):
-    var_beta = sigma^2 * np.linalg.inv(np.transpose(X) @ projection_matrix(Z) @ X)
-    return var_beta 
+    var_beta = (np.asscalar(sigma**2) * np.identity(X.shape[1])) @ np.linalg.inv(np.transpose(X) @ projection_matrix(Z) @ X)
+    se_beta = np.sqrt(np.diag(var_beta))
+    return se_beta 
