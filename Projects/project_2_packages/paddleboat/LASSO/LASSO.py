@@ -86,9 +86,6 @@ def pick_lowest_lamda():
     print("Working!")
     return(lowest_lambda)
 
-
-    loss_values = loss_function(lambda)
-
 def main():
     """Performs OLS, prints output to table"""
     print("Working!")
