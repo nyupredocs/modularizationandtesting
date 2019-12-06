@@ -2,13 +2,6 @@
 
 import numpy as np
 
-Z = np.matrix([[1, 2, 3],
-               [4, 5, 6],
-               [7, 8, 9],
-               [10, 11, 12]])
-
-
-
 def calculate_sigma(Z, X, Y, beta_iv):
     N = Z.shape[0]
     resid = Y - X @ beta_iv

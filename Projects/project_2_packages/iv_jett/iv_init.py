@@ -5,18 +5,8 @@ Author: Group 2 NYU Pre docs
 Date Created: December 6, 2019
 
 '''
-
 import numpy as np
 
-mat_x = np.transpose(np.matrix([ [4, .2, 1, 5, 1, 10, 20],
-                    [.4, 2, 2, 2, 2, 11, 25],
-                    [0, 0, .3, 1, 3, 12, 40]]))
-
-mat_z  = np.transpose(np.matrix([[1, .5, 2, 3, 4, 13, 56],
-                    [3, 0, .2, 3, 5, 14, 60],
-                    [1, 0, .4, 3, 6, 15, 77]]))
-
-mat_y  = np.transpose(np.array([[3, 5, 2, 1, 7, 16, 80]]))
 
 def check_dim(a, b, c):
     '''
@@ -36,7 +26,6 @@ def check_dim(a, b, c):
         assert a.shape[1] <= b.shape[1]
     except:
         raise Exception('Model underidentified')
-
 
 def projection_matrix(b):
     '''
@@ -63,5 +52,3 @@ def estimate_beta_iv(a, b, c):
     b_3 = np.transpose(a) @ proj @ c
     return b_2 @ b_3
 
-
-print(estimate_beta_iv(mat_x, mat_z, mat_y))
