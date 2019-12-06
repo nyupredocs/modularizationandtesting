@@ -7,6 +7,8 @@ def get_betas(X, Y):
     print("Working!")
 
 def get_residuals(betas, X):
+    residuals = betas * X
+    return residuals
     print("Working!")
 
 def get_ses():
