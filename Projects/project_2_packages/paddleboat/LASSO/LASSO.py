@@ -60,31 +60,36 @@ def get_sse(Y, X, betas):
     print("Working!")
     return sse
 
-def get_loss_function(SSE, lambda, betas):
+def get_loss_function(SSE, lamb, betas):
     """Get loss function"""
-    betas_without_intercept = betas[1:length(betas)]
-    loss_function = SSE + lambda * sum(abs(betas_without_intercept))
+    betas_no_intercept = betas[1:len(betas)]
+    loss_function = SSE + lamb * np.sum(np.abs(betas_no_intercept))
 
     print("Working!")
     return loss_function
 
-def get_coefficients_given_lambda(lambda):
+def get_coeffs_given_lambda(X, Y, lamb):
+    Z = # STANDARDIZED X
+    Y_c = # CENTERED Y
+    coefficients = np.linalg.inv(Z.transpose().dot(Z).values() + lamb * np.identity(X.shape[1])).dot(Z.transpose().dot(Y_c))
     return(coefficients)
 
-def pick_lowest_lamda():
+def pick_lowest_lambda(X, Y):
     """Pick lowest lambda"""
-    lambdas = [1,10]
-    losses = list(length(lambda))
+    lambs = range(0, 1, 100)
+    losses = list()
 
-    for lambda in lambdas:
-        loss = loss_function(lambda)
-        list.append(loss)
+    for l in lambs:
+        coeffs = get_coeffs_given_lambda(X, Y, l)
+        SSE = get_sse(Y, X, coeffs)
+        loss = loss_function(SSE, l, coeffs)
+        losses.append(loss)
 
     min_loss = min(losses)
     lowest_lambda = loss(min_loss_position_in_list)
 
     print("Working!")
-    return(lowest_lambda)
+    return(lowest_lamb)
 
 def main():
     """Performs OLS, prints output to table"""
