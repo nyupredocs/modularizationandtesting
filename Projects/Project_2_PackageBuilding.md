@@ -13,13 +13,13 @@ for -- Additionally, you'll need to submit a PR to this repository to add the me
 and dataset to the table below.
 
 
-| Method                                               | Potential datasets |
-| :-----                                               | :----------------- |
-| Instrumental variables (IV)                          |                    |
-| Fixed effects (FE)                                   |                    |
-| Random effects (RE)                                  |                    |
-| Zero-inflated regression (zip)                       |                    |
-| Multinomial logit                                    |                    |
-| Autoregressive integrated moving average (ARIMA)     |                    |
-| Autoregressive conditional heteroskedasticity (ARCH) |                    |
+| Method                                               | Potential datasets                                                     |
+| :--------------------------------------------------- | :--------------------------------------------------------------------- |
+| Instrumental variables (IV)                          | [Cornwell Rupert 1988](./data/CornwellRupert_1988.md),                 |
+| Fixed effects (FE)                                   | [Cornwell Rupert 1988](./data/CornwellRupert_1988.md),                 |
+| Random effects (RE)                                  |                                                                        |
+| Zero-inflated regression (zip)                       |                                                                        |
+| Multinomial logit                                    | [Hensher Greene 2007](./data/HensherGreen_2007.md)                     |
+| Autoregressive integrated moving average (ARIMA)     |                                                                        |
+| Autoregressive conditional heteroskedasticity (ARCH) |                                                                        |
 
