@@ -12,6 +12,9 @@ def get_residuals(betas, X):
     print("Working!")
 
 def get_ses():
+    residuals2 = residuals^2
+    XX = (transpose(X) * X)^(-1)
+    ses = (residuals2 / (N-1)) * XX
     print("Working!")
 
 def main():
