@@ -63,7 +63,7 @@ def get_sse(Y, X, betas):
 def get_loss_function(SSE, lambda, betas):
     """Get loss function"""
     betas_without_intercept = betas[1:length(betas)]
-    loss_function = SSE + lambda * betas_without_intercept
+    loss_function = SSE + lambda * sum(abs(betas_without_intercept))
 
     print("Working!")
     return loss_function
