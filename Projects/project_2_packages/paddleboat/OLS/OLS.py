@@ -29,14 +29,16 @@ def get_n(X, Y):
     print("Working!")
     return n
 
-def get_ses():
+def get_ses(residuals, X, Y):
     """Get SEs (according to OLS formula)"""
     residuals2 = residuals^2
     XX = (transpose(X) * X)^(-1) # transpose is not a real function
+    N = get_n(X, Y)
     ses = (residuals2 / (N-1)) * XX
 
     print("Working!")
     return ses
+
 
 def main():
     """Performs OLS, prints output to table"""
