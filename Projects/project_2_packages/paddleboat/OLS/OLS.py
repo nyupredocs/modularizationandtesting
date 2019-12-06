@@ -17,6 +17,7 @@ def get_residuals(betas, X, Y):
     return residuals
 
 def get_n(X, Y):
+    """Get N, check independent vs dependent variables"""
     n_X = length(X)
     n_Y = length(Y)
 
@@ -29,6 +30,7 @@ def get_n(X, Y):
     return n
 
 def get_ses():
+    """Get SEs (according to OLS formula)"""
     residuals2 = residuals^2
     XX = (transpose(X) * X)^(-1)
     ses = (residuals2 / (N-1)) * XX
