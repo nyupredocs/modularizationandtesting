@@ -74,9 +74,3 @@ def estimate_beta_iv(a, b, c, nocons=""):
             print("beta_"+ str(i) + " :" + str(betas[i]))
     return betas_all
 
-estimate_beta_iv(mat_x, mat_z, mat_y)
-
-<<<<<<< HEAD:Projects/project_2_packages/iv_init.py
-
-=======
->>>>>>> fe9d8d5cd1696c6cb57c7b13225c55807b8847a6:Projects/project_2_packages/iv_jett/iv_init.py
