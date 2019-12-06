@@ -11,6 +11,15 @@ def get_residuals(betas, X):
     return residuals
     print("Working!")
 
+def get_n(X, Y):
+    n_X = length(X)
+    n_Y = length(Y)
+    if n_X == n_Y:
+        n = n_X
+    else:
+        print("Error!")
+    return n
+
 def get_ses():
     residuals2 = residuals^2
     XX = (transpose(X) * X)^(-1)
