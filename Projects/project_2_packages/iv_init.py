@@ -8,21 +8,29 @@ Date Created: December 6, 2019
 
 import numpy as np
 
-mat_x = np.transpose(np.matrix([ [4, .2, 1, 5],
-                    [.4, 2, 2, 2],
-                    [0, 0, .3, 1]]))
+mat_x = np.transpose(np.matrix([ [4, .2, 1, 5, 1, 10, 20],
+                    [.4, 2, 2, 2, 2, 11, 25],
+                    [0, 0, .3, 1, 3, 12, 40]]))
 
-mat_z  = np.transpose(np.matrix([[1, .5, 2, 3],
-                    [3, 0, .2, 3],
-                    [1, 0, .4, 3]]))
+mat_z  = np.transpose(np.matrix([[1, .5, 2, 3, 4, 13, 56],
+                    [3, 0, .2, 3, 5, 14, 60],
+                    [1, 0, .4, 3, 6, 15, 77]]))
 
-mat_y  = np.transpose(np.array([[3, 5, 2, 1]]))
+mat_y  = np.transpose(np.array([[3, 5, 2, 1, 7, 16, 80]]))
 
 def check_dim(a, b, c):
+    '''
+    Check dimensions
+    '''
     try:
-        assert a.shape[1] == b.shape[1] == c.shape[1]
+        assert len(a.shape) == 2 & len(b.shape) == 2 & len(c.shape) == 2
     except:
-        raise Exception('Matrices are the wrong shape')
+        raise Exception('Incorrect data dimension input')
+
+    try:
+        assert a.shape[0] == b.shape[0] == c.shape[0]
+    except:
+        raise Exception('Number of observations not equal')
 
     try:
         assert a.shape[1] <= b.shape[1]
@@ -48,10 +56,12 @@ def estimate_beta_iv(a, b, c):
         c (matrix) -- y
     '''
 
+    check_dim(a, b, c)
     proj = projection_matrix(b)
     b_1  = np.transpose(a) @ proj @ a
     b_2 = np.linalg.inv(b_1)
     b_3 = np.transpose(a) @ proj @ c
     return b_2 @ b_3
+
 
 print(estimate_beta_iv(mat_x, mat_z, mat_y))
