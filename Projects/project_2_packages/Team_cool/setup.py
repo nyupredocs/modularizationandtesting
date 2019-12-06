@@ -7,7 +7,7 @@ setuptools.setup(
     name="OLS_team_cool", # Replace with your own username
     version="0.0.1",
     author="Team Cool",
-    author_email="team_cool@team_cool.com",
+    author_email="gen.li@yale.edu",
     description="A small example package for OLS.",
     long_description=long_description,
     long_description_content_type="text/markdown",
