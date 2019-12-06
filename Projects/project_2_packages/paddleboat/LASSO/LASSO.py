@@ -72,13 +72,18 @@ def get_coefficients_given_lambda(lambda):
     return(coefficients)
 
 def pick_lowest_lamda():
+    """Pick lowest lambda"""
     lambdas = [1,10]
     losses = list(length(lambda))
+
     for lambda in lambdas:
         loss = loss_function(lambda)
         list.append(loss)
+
     min_loss = min(losses)
     lowest_lambda = loss(min_loss_position_in_list)
+
+    print("Working!")
     return(lowest_lambda)
 
 
