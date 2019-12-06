@@ -3,7 +3,7 @@ import numpy as np
 
 def get_betas(X, Y):
     """Get betas (according to OLS formula)"""
-    betas = (transpose(X) * X)^(-1) * (transpose(X) * Y) # transpose is not a real function
+    betas = (np.transpose(X) * X)^(-1) * (np.transpose(X) * Y) # transpose is a numpy function
 
     print("Working!")
     return betas
@@ -32,7 +32,7 @@ def get_n(X, Y):
 def get_ses(residuals, X, Y):
     """Get SEs (according to OLS formula)"""
     residuals2 = residuals^2
-    XX = (transpose(X) * X)^(-1) # transpose is not a real function
+    XX = (np.transpose(X) * X)^(-1) # transpose is not a real function
     N = get_n(X, Y)
     ses = (residuals2 / (N-1)) * XX
 
