@@ -44,7 +44,7 @@ def estimate_beta_iv(a, b, c, nocons=""):
         b (matrix) -- z
         c (matrix) -- y
     '''
-    if nocons != "" & nocons != "nocons":
+    if nocons != "" and nocons != "nocons":
         raise Exception('nocons option misspecified')
 
     check_dim(a, b, c)
