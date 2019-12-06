@@ -31,6 +31,7 @@ _configtest.o.d
 *.fls
 *.m~
 *.vrb
+*.xdv
 
 # Sublime text files
 *.sublime*
