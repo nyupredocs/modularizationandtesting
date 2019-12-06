@@ -3,13 +3,13 @@ import numpy as np
 
 def get_betas(X, Y):
     betas = (transpose(X) * X)^(-1) * (transpose(X) * Y)
-    return betas
     print("Working!")
+    return betas
 
 def get_residuals(betas, X):
     residuals = betas * X
-    return residuals
     print("Working!")
+    return residuals
 
 def get_n(X, Y):
     n_X = length(X)
@@ -18,6 +18,7 @@ def get_n(X, Y):
         n = n_X
     else:
         print("Error!")
+    print("Working!")
     return n
 
 def get_ses():
@@ -25,6 +26,7 @@ def get_ses():
     XX = (transpose(X) * X)^(-1)
     ses = (residuals2 / (N-1)) * XX
     print("Working!")
+    return ses
 
 def main():
     print("Working!")
