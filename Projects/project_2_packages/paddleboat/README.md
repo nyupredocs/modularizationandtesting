@@ -4,7 +4,13 @@ paddling together since 2019.
 
 ## Function
 
-Implements OLS.
+### OLS
+
+`OLS.py` implements OLS.
+
+### LASSO
+
+`LASSO.py` implements LASSO.
 
 ## Team members
 
