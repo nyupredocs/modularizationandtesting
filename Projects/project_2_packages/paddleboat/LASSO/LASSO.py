@@ -52,6 +52,14 @@ def get_r2(Y, X, betas):
     print("Working!")
     return r2
 
+def get_loss_function(SSE, lambda, betas):
+    """Get loss function"""
+    betas_without_intercept = betas[1:length(betas)]
+    loss_function = SSE + lambda * betas_without_intercept
+
+    print("Working!")
+    return r2
+
 def main():
     """Performs OLS, prints output to table"""
     print("Working!")
