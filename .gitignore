@@ -30,6 +30,7 @@ _configtest.o.d
 *.bib.bak
 *.fls
 *.m~
+*.vrb
 
 # Sublime text files
 *.sublime*
