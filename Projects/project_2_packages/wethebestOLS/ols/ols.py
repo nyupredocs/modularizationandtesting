@@ -2,14 +2,19 @@ def ols(y, X):
     """
     This is THE BEST ols.
 
-    Parameters:
-    -----------
-        y - N by 1 response vector
-        X - N by K covariate matrix
-    Returns:
+    Parameters
+    ----------
+        y :
+            N by 1 response vector
+        X :
+            N by K covariate matrix
+
+    Returns
     --------
-        beta - OLS coefficients
-        se - standard errors of the coefficients
+        beta :
+            OLS coefficients
+        se :
+            standard errors of the coefficients
     """
 
     XpX = X.T@X
