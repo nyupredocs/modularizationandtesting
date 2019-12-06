@@ -1,6 +1,6 @@
 import numpy as np
 
-
+from iv_jett.iv_init import projection_matrix
 
 def calculate_sigma(Z, X, Y, beta_iv):
     N = Z.shape[0]
