@@ -1,7 +1,7 @@
-ols
-===
+wethebestOLS
+============
 
 .. toctree::
    :maxdepth: 4
 
-   ols
+   wethebestOLS
