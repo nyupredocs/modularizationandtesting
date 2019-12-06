@@ -91,10 +91,15 @@ def pick_lowest_lamda():
     '''
         Pick lowest lambda
         '''
-    lambs = [1,10]
+    lambs = [0.001, 0.01, 0.1, 0.5, 1, 2, 10]
+    l_num = length(lam)
+    pred_num = X.shape[1]
     losses = list(length(lamb))
 
-    for lamb in lambs:
+    # prepare data for enumerate
+    coeff_a = np.zeros((l_num, pred_num))
+
+  for ind, i in enumerate(lambs):    
         loss = loss_function(lamb)
         list.append(loss)
 
