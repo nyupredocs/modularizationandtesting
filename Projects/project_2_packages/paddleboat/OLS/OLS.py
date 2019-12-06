@@ -2,17 +2,18 @@ import pandas as pd
 import numpy as np
 
 def get_betas(X, Y):
+    """Get betas (according to OLS formula)"""
     betas = (transpose(X) * X)^(-1) * (transpose(X) * Y)
-    
-    print("Working!")
 
+    print("Working!")
     return betas
 
-def get_residuals(betas, X):
-    residuals = betas * X
+def get_residuals(betas, X, Y):
+    """Get residuals (according to OLS formula)"""
+    y_hat = betas * X
+    residuals = Y - y_hat
 
     print("Working!")
-
     return residuals
 
 def get_n(X, Y):
@@ -25,7 +26,6 @@ def get_n(X, Y):
         print("Error!")
 
     print("Working!")
-
     return n
 
 def get_ses():
@@ -34,7 +34,6 @@ def get_ses():
     ses = (residuals2 / (N-1)) * XX
 
     print("Working!")
-
     return ses
 
 def main():
