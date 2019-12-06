@@ -1,0 +1,22 @@
+the\_package package
+====================
+
+Submodules
+----------
+
+the\_package.regress\_ols module
+--------------------------------
+
+.. automodule:: the_package.regress_ols
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: the_package
+   :members:
+   :undoc-members:
+   :show-inheritance:
