@@ -96,7 +96,7 @@ def optimization(objectiveFunction, Y,X,bbeta):
 
 def standardErrorsLogit(optimization, Y,X,bbeta):
     '''
-    This is objectiveFunction.
+    This retrieves standard errors.
 
     Parameters
     ----------
