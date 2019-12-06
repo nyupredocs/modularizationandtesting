@@ -58,7 +58,7 @@ def get_loss_function(SSE, lambda, betas):
     loss_function = SSE + lambda * betas_without_intercept
 
     print("Working!")
-    return r2
+    return loss_function
 
 def main():
     """Performs OLS, prints output to table"""
