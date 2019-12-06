@@ -52,6 +52,14 @@ def get_r2(Y, X, betas):
     print("Working!")
     return r2
 
+def get_sse(Y, X, betas):
+    """Get sum of squared errors"""
+    y_hat = X * beta
+    sse = (Y - y_hat) ** 2
+
+    print("Working!")
+    return sse
+
 def get_loss_function(SSE, lambda, betas):
     """Get loss function"""
     betas_without_intercept = betas[1:length(betas)]
