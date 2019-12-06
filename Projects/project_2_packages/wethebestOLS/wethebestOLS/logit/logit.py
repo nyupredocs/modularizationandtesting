@@ -14,18 +14,47 @@ Y = (np.random.uniform(0,1,nObs) < 0.5).astype(int).reshape(nObs,1)
 
 
 def logit(X, bbeta):
-    '''
-    blah blah
-    '''
+    """
+    This is THE BEST Logit.
+
+    Parameters
+    ----------
+    X :
+        N by K covariate matrix
+    bbeta :
+        Array of K numbers
+
+
+    Returns
+    -------
+    Logit :
+        N by 1 logit conversion
+
+    """
     Logit = 1/(1+np.exp(-np.dot(X,bbeta)))
 
     return Logit
 
 def objectiveFunction(Y, X, bbeta):
-    '''
-    blah blah
-    '''
+    """
+    This is objectiveFunction.
 
+    Parameters
+    ----------
+    X :
+        N by K covariate matrix
+    Y :
+        Array of N x 1 ones and zeros
+    bbeta :
+        parameters of the function (K,1)
+
+
+    Returns
+    -------
+    Logit :
+        Log Likelihood
+
+    """
     nObs = X.shape[0]
 
     yhat = logit(X, bbeta)
@@ -40,7 +69,25 @@ def objectiveFunction(Y, X, bbeta):
 
 def optimization(objectiveFunction, Y,X,bbeta):
     '''
-    blah blah
+    This is objectiveFunction.
+
+    Parameters
+    ----------
+    objectiveFunction :
+        Objective function for the log likelihood
+    Y :
+        Array of N x 1 ones and zeros
+    X :
+        parameters of the function (K,1)
+    bbeta :
+        parameters of the function (K,1)
+
+
+    Returns
+    -------
+    Logit :
+        betaHat
+
     '''
     betahat = minimize(lambda beta: objectiveFunction(Y,X, beta), bbeta, method='nelder-mead',options={'xtol': 1e-8, 'disp': True})
 

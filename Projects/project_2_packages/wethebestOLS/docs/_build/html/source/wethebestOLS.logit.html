@@ -42,19 +42,76 @@
 <dl class="function">
 <dt id="wethebestOLS.logit.logit.logit">
 <code class="descclassname">wethebestOLS.logit.logit.</code><code class="descname">logit</code><span class="sig-paren">(</span><em>X</em>, <em>bbeta</em><span class="sig-paren">)</span><a class="headerlink" href="#wethebestOLS.logit.logit.logit" title="Permalink to this definition">¶</a></dt>
-<dd><p>blah blah</p>
+<dd><p>This is THE BEST Logit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> – N by K covariate matrix</li>
+<li><strong>bbeta</strong> – Array of K numbers</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">N by 1 logit conversion</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Logit</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="wethebestOLS.logit.logit.objectiveFunction">
 <code class="descclassname">wethebestOLS.logit.logit.</code><code class="descname">objectiveFunction</code><span class="sig-paren">(</span><em>Y</em>, <em>X</em>, <em>bbeta</em><span class="sig-paren">)</span><a class="headerlink" href="#wethebestOLS.logit.logit.objectiveFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>blah blah</p>
+<dd><p>This is objectiveFunction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> – N by K covariate matrix</li>
+<li><strong>Y</strong> – Array of N x 1 ones and zeros</li>
+<li><strong>bbeta</strong> – parameters of the function (K,1)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Log Likelihood</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Logit</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="wethebestOLS.logit.logit.optimization">
 <code class="descclassname">wethebestOLS.logit.logit.</code><code class="descname">optimization</code><span class="sig-paren">(</span><em>objectiveFunction</em>, <em>Y</em>, <em>X</em>, <em>bbeta</em><span class="sig-paren">)</span><a class="headerlink" href="#wethebestOLS.logit.logit.optimization" title="Permalink to this definition">¶</a></dt>
-<dd><p>blah blah</p>
+<dd><p>This is objectiveFunction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objectiveFunction</strong> – Objective function for the log likelihood</li>
+<li><strong>Y</strong> – Array of N x 1 ones and zeros</li>
+<li><strong>X</strong> – parameters of the function (K,1)</li>
+<li><strong>bbeta</strong> – parameters of the function (K,1)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">betaHat</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Logit</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
