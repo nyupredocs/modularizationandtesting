@@ -33,6 +33,7 @@ def ols(y, X):
         resid = y - pred
         sse = sum(resid**2)[0]
         N = X.shape[0]
+        K = X.shape[1]
         mean_sse = sse/(N - K)
 
 

@@ -3,7 +3,7 @@ import os
 import scipy
 import numpy as np
 import unittest
-sys.path.append(os.path.abspath('wethebestOLS/'))
+sys.path.append(os.path.abspath('..'))
 from ols import ols
 from numpy.linalg import matrix_rank
 import numpy as np
