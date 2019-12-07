@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Print Directory
+      run: echo $(pwd)
+    - name: Run Tests
+      run: python3 -m unittest -v -s Projects/project_2_packages
