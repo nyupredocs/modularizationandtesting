@@ -37,7 +37,7 @@ def projection_matrix(b):
     P_b = b @ np.linalg.inv((np.transpose(b) @ b)) @ np.transpose(b)
     return P_b
 
-def estimate_beta_iv(a, b, c, nocons = False):
+def estimate_beta_iv(a, b, c, nocons = False, verbose = False):
     '''
     Inputs:
         a (matrix) -- x
@@ -55,21 +55,9 @@ def estimate_beta_iv(a, b, c, nocons = False):
         b_1 = np.ones((N,1))
         b = np.hstack((b_1, b))
 
-
     proj = projection_matrix(b)
     b_1  = np.transpose(a) @ proj @ a
     b_2 = np.linalg.inv(b_1)
     b_3 = np.transpose(a) @ proj @ c
     betas_all = b_2 @ b_3
-
-    if nocons == False:
-        cons = betas_all[0]
-        betas = betas_all[1:]
-        print("_cons: " + str(cons))
-        for i in range(0, len(betas)):
-            print("beta_"+ str(i) + " :" + str(betas[i]))
-    elif nocons == True:
-        betas = betas_all[0:]
-        for i in range(0, len(betas)):
-            print("beta_"+ str(i) + " :" + str(betas[i]))
     return betas_all

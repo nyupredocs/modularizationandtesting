@@ -1,6 +1,5 @@
 import numpy as np
-from iv_jett.iv_standard_error import *
-from  iv_jett.iv_init import *
+from iv_jett.run import *
 
 mat_x = np.transpose(np.matrix([ [4, .2, 1, 5, 1, 10, 20],
                     [.4, 2, 2, 2, 2, 11, 25],
@@ -13,10 +12,9 @@ mat_z  = np.transpose(np.matrix([[1, .5, 2, 3, 4, 13, 56],
 mat_y  = np.transpose(np.array([[3, 5, 2, 1, 7, 16, 80]]))
 
 
-
+'''
 beta_iv_hat = estimate_beta_iv(mat_x, mat_z, mat_y)
-
-print(beta_iv_hat)
+#print(beta_iv_hat)
 
 
 sigma = calculate_sigma(mat_z, mat_x, mat_y, beta_iv_hat)
@@ -26,3 +24,7 @@ print(sigma)
 print("var beta")
 var_beta = calculate_var_beta(sigma, mat_x, mat_z)
 print(var_beta)
+'''
+ret = TwoStageLeastSquaresRegress(mat_x, mat_y, mat_z, nocons = False, verbose = True)
+#print(ret['Beta IV'])
+#print(ret['Standard Error'])
