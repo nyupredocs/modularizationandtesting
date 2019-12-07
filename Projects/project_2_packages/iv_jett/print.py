@@ -37,5 +37,6 @@ def print_res(result_dict, nocons = False):
         for i in range(0, len(betas)):
             print("\u03B2"+ str(i).translate(SUB) + "  :    " + \
                     str(round(float(betas[i]), 4)))
-            print("\t(" + str(round(float(ses[i]), 4)) + ")")
+            print("\t(" + str(round(float(ses[i]), 5)) + ")\t")
+            print("------------------------")
     print("\n")
