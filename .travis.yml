@@ -10,6 +10,7 @@ matrix:
       os: linux
       language: python
       before_install:
+          - cd Projects/project_2_packages/Team_cool
           - pip install -U pip
           - pip install -r requirements.txt
           - pip install .
@@ -20,6 +21,7 @@ matrix:
       osx_image: xcode10.2  # Python 3.7.3 running on macOS 10.14.3
       language: shell       # 'language: python' is an error on Travis CI macOS
       before_install:
+        - cd Projects/project_2_packages/Team_cool
         - python3 --version
         - pip3 install -U pip
         - pip3 install -r requirements.txt
@@ -30,6 +32,7 @@ matrix:
       os: windows           # Windows 10.0.17134 N/A Build 17134
       language: shell       # 'language: python' is an error on Travis CI Windows
       before_install:
+        - cd Projects/project_2_packages/Team_cool
         - choco install python --version 3.7.4
         - python -m pip install --upgrade pip
         - pip3 install -r requirements.txt
