@@ -2,7 +2,6 @@ import sys
 sys.path.insert(0,'../OLS')
 
 import numpy as np
-import transcripty as tpy
 import unittest
 from OLS import beta_ols, Sigma
 import statsmodels.api as sm
@@ -74,7 +73,6 @@ class TestHPM(unittest.TestCase):
         print(test_kc)
 
         #self.assertIsNone(np.testing.assert_almost_equal([1.5, 2.5, 2, 3, 6], coeff_estimates, decimal=1))
-
 
 
 if __name__ == "__main__":
