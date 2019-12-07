@@ -13,5 +13,15 @@ class TestBetas(unittest.TestCase):
 
         self.assertIsNone(np.testing.assert_allclose(betas, x2))
 
+    def test_large_data(self):
+        z = np.random.rand(10^8, 2)
+        x = np.random.rand(10^8, 2)
+        y = np.random.rand(10^8, 2)
+
+        betas = np.linalg.inv(np.transpose(z) @ x) @ np.transpose(z) @ y
+        x2 = iv_init.estimate_beta_iv(x, z, y, nocons = True)
+
+        self.assertIsNone(np.testing.assert_allclose(betas, x2))
+
 if __name__ == "__main__":
     unittest.main()
