@@ -11,6 +11,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Print Directory
       run: echo $(pwd)
+    - name: Docker
+      run: docker ps; docker ps -a
     - name: Install numoy because I don't understand dependencies
       run: pip install numpy
     - name: Run Tests
