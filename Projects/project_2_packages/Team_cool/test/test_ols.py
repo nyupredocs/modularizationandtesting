@@ -12,6 +12,7 @@ from OLS_team_cool import ols
 #We are creating a class to define the variables we are testing.
 class TestOLS(unittest.TestCase):
 
+#Here we are testing our models
     def setUp(self):
         self.x = np.random.randn(100,2)
         self.eps = np.random.normal(0,1,(100,1))

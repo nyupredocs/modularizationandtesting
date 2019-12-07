@@ -1,17 +1,38 @@
 language: python
+
+# ===== Linux ======
 dist: xenial
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"      # current default Python on Travis CI
-  - "3.7"
-  - "3.8"
-  - "3.8-dev"  # 3.8 development branch
-  - "nightly"  # nightly build
-# command to install dependencies
-install:
-  - pip install -r requirements.txt
-# command to run tests
-script:
-  - python -m unittest
+  - 3.7
+matrix:
+  include:
+    - name: "Python 3.7 on linux"
+      os: linux
+      language: python
+      before_install:
+          - pip install -U pip
+          - pip install -r requirements.txt
+          - pip install .
+      script: python -m unittest -v
+    # ======= OSX ========
+    - name: "Python 3.7.3 on macOS 10.14"
+      os: osx
+      osx_image: xcode10.2  # Python 3.7.3 running on macOS 10.14.3
+      language: shell       # 'language: python' is an error on Travis CI macOS
+      before_install:
+        - python3 --version
+        - pip3 install -U pip
+        - pip3 install -r requirements.txt
+        - pip install .
+      script: python3 -m unittest -v
+    #  ====== WINDOWS =========
+    - name: "Python 3.7.4 on Windows"
+      os: windows           # Windows 10.0.17134 N/A Build 17134
+      language: shell       # 'language: python' is an error on Travis CI Windows
+      before_install:
+        - choco install python --version 3.7.4
+        - python -m pip install --upgrade pip
+        - pip3 install -r requirements.txt
+        - pip install .
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      script: python -m unittest -v
