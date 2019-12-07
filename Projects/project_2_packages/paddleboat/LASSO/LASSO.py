@@ -36,6 +36,25 @@ def beta_lasso(Y, X, lamb):
     return(coefficients)
 
 
+def sse(Y, X, betas):
+    '''
+    Get sum of square errors
+
+    Parameters
+    ----------
+    Y : Nx1 Matrix
+    X : Matrix
+    betas : Vector of estimated coefficients
+
+    Returns
+    -------
+    sse : Sum of square errors
+    '''
+   
+    e = betas.dot(X.values.T)-Y
+    sse = np.sum(e**2)
+    return sse
+
 
 def lasso_fit(Y, X, lamb, n_iter=100, progress_disable = False):
     """
@@ -100,25 +119,6 @@ def lasso_fit(Y, X, lamb, n_iter=100, progress_disable = False):
                         bootstrap_coeffs_t = beta_hat_boot_t,
                         bootstrap_coeffs_p = beta_hat_boot_p)
 
-
-def sse(Y, X, betas):
-    '''
-    Get sum of square errors
-
-    Parameters
-    ----------
-    Y : Nx1 Matrix
-    X : Matrix
-    betas : Vector of estimated coefficients
-
-    Returns
-    -------
-    sse : Sum of square errors
-    '''
-   
-    e = betas.dot(X.values.T)-Y
-    sse = np.sum(e**2)
-    return sse
 
 
 def loss(Y, X, lamb, betas):
