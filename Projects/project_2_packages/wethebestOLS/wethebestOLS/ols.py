@@ -19,14 +19,15 @@ def ols(y, X):
     se : np.array((K, 1), float64)
         standard errors of the coefficients
     """
-    if matrix_rank(X) == X.shape[1]:
-        XpX = XpX = X.T@X
-        β = calc_beta(y, X, XpX)
-        se = calc_se(y, X, β, XpX)
-    else:
-        print("Error: matrix does not have full rank, returning nans")
-        β   = np.nan
-        se  = np.nan
+
+    XpX = XpX = X.T@X
+
+    if np.linalg.det(XpX) == 0:
+        raise Exception('XpX Matrix is singular')
+
+    β = calc_beta(y, X, XpX)
+    se = calc_se(y, X, β, XpX)
+
     return β, se
 
 def calc_beta(y, X, XpX):

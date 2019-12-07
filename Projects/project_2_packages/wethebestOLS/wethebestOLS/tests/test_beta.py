@@ -7,7 +7,7 @@ import os
 sys.path.append(os.path.abspath('..'))
 from ols import ols
 
-class test_beta ( unittest.TestCase ) :
+class test_beta(unittest.TestCase):
     def test_beta(self):
         # Generate fake data
         K = 10
@@ -24,3 +24,6 @@ class test_beta ( unittest.TestCase ) :
         beta_hat, sigma_hat = ols(y, X)
         abs_diff = np.all(abs(beta - beta_hat) < .01)
         self.assertTrue(abs_diff)
+
+if __name__ == '__main__':
+    unittest.main()

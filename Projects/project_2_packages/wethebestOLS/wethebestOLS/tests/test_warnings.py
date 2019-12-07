@@ -8,20 +8,13 @@ from ols import ols
 from numpy.linalg import matrix_rank
 import numpy as np
 
-
 class TestRandomStuff(unittest.TestCase):
-
-
-    def test_isnan(self):
-
-        nObs  = 1000
-        nParams = 10
-        y = np.random.random((nObs,1))
-        X = np.ones((nObs,nParams))
-        beta, ci = ols(y,X)
-
-        self.assertTrue(np.isnan(beta))
-
+    def test_singular(self):
+        N  = 1000
+        K = 10
+        y = np.random.random((N, 1))
+        X = np.ones((N, K))
+        with self.assertRaises(Exception): ols(y, X)
 
 if __name__ == '__main__':
     unittest.main()
