@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wethebestOLS",
-    version="0.0.8",
+    version="0.0.9",
     author="Group 1",
     author_email="author@example.com",
     description="A package that implements OLS and logit.",
