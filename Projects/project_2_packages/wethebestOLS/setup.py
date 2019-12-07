@@ -4,11 +4,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="wethebestOLS", # Replace with your own username
-    version="0.0.2",
-    author="Example Author",
+    name="wethebestOLS",
+    version="0.0.3",
+    author="Group 1",
     author_email="author@example.com",
-    description="A small example package",
+    description="A package that implements OLS and logit.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pypa/sampleproject",
