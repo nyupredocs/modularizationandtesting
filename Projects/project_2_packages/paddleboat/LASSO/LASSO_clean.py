@@ -58,6 +58,12 @@ def beta_lasso(X, Y, lamb):
         Returns
         -------
         coefficients : Vector of Lasso coefficients
+
+        Note
+        ----
+        For simplicity we use matrix inverses,
+        which are not computationally efficient at O(p^3).
+        SVD would be a more efficient approach.
         """
     Z = preprocessing.scale(X_train)
     Y_c = Y - np.mean(Y)
@@ -66,6 +72,7 @@ def beta_lasso(X, Y, lamb):
     right = Z.transpose().dot(Y_c)
     coefficients = left.dot(right)
     return(coefficients)
+
 
 def pick_lowest_lambda(X, Y):
         """
