@@ -5,9 +5,9 @@ from tqdm import tqdm
 from scipy.stats import t
 
 
-def beta_lasso(Y, X, lamb):
+def beta_ridge(Y, X, lamb):
     """
-    Compute lasso coeffs
+    Compute ridge coeffs
 
     Parameters
     ----------
@@ -17,7 +17,7 @@ def beta_lasso(Y, X, lamb):
 
     Returns
     -------
-    coefficients : Vector of Lasso coefficients
+    coefficients : Vector of ridge coefficients
 
     Note
     ----
@@ -25,11 +25,11 @@ def beta_lasso(Y, X, lamb):
     which are not computationally efficient at O(p^3).
     SVD would be a more efficient approach.
     """
-    
+
     Z = X.iloc[:, 1:]
     Z = pd.DataFrame(preprocessing.scale(Z))
     Y_c = Y - np.mean(Y)
-    
+
     left = np.linalg.inv(Z.transpose().dot(Z) + lamb * np.identity(Z.shape[1]))
     right = Z.transpose().dot(Y_c)
     coefficients = left.dot(right)
@@ -50,15 +50,15 @@ def sse(Y, X, betas):
     -------
     sse : Sum of square errors
     '''
-   
+
     e = betas.dot(X.values.T)-Y
     sse = np.sum(e**2)
     return sse
 
 
-def lasso_fit(Y, X, lamb, n_iter=100, progress_disable = False):
+def ridge_fit(Y, X, lamb, n_iter=100, progress_disable = False):
     """
-    Estimate Lasso standard errors through bootstrapping
+    Estimate ridge standard errors through bootstrapping
 
     Parameters
     ----------
@@ -70,9 +70,9 @@ def lasso_fit(Y, X, lamb, n_iter=100, progress_disable = False):
 
     Returns
     -------
-    results : Results wrapper with lasso results
-                coefficients = Lasso coefficients from full sample
-                bootstrap_coeffs = Lasso coefficients from bootstrapping procedure
+    results : Results wrapper with ridge results
+                coefficients = ridge coefficients from full sample
+                bootstrap_coeffs = ridge coefficients from bootstrapping procedure
                 bootstrap_coeffs_var = Coefficient variance from bootstrapping
                 bootstrap_coeffs_SE = Coefficient standard errors from bootstrapping
                 bootstrap_coeffs_t = T-stats (from bootstrapping SE)
@@ -87,7 +87,7 @@ def lasso_fit(Y, X, lamb, n_iter=100, progress_disable = False):
         b_index = np.random.choice(range(0, nobs), nobs, replace = True)
         _Y, _X = pd.DataFrame(Y).iloc[b_index], pd.DataFrame(X).iloc[b_index]
 
-        b_beta_hat = beta_lasso(np.array(_Y), _X, lamb)
+        b_beta_hat = beta_ridge(np.array(_Y), _X, lamb)
         # Saving coefficient estimates
         beta_hat_boots[b_iter, :] = b_beta_hat.squeeze()
 
@@ -103,14 +103,14 @@ def lasso_fit(Y, X, lamb, n_iter=100, progress_disable = False):
     beta_hat_boot_SE = np.sqrt(beta_hat_boot_var)
 
     # Bootstrapped t-stats for null that coefficient = 0
-    ## note that we use the coefficient estimates from the full sample 
+    ## note that we use the coefficient estimates from the full sample
     ## but the variance from the bootstrapping procedure
-    beta_hat_boot_t = beta_lasso(Y, X, lamb) / beta_hat_boot_SE
+    beta_hat_boot_t = beta_ridge(Y, X, lamb) / beta_hat_boot_SE
 
     # Bootstrapped p values from t test (two-sided)
     beta_hat_boot_p = pd.Series(2 * (1- t.cdf(np.abs(beta_hat_boot_t), df = nobs - K)), beta_hat_boot_t.index)
 
-    return Results_wrap(model = print('Lasso, lambda =', lamb), 
+    return Results_wrap(model = print('Lasso, lambda =', lamb),
                         coefficients = beta_lasso(Y, X, lamb),
                         bootstrap_coeffs = beta_hat_boots,
                         bootstrap_coeffs_var = beta_hat_boot_var,
@@ -140,7 +140,7 @@ class Results_wrap(object):
         this holds the summary tables and text, which can be printed or
         converted to various output formats.
     '''
-    def __init__(self, model, coefficients, 
+    def __init__(self, model, coefficients,
         cov_type='nonrobust', bootstrap_coeffs=None, bootstrap_coeffs_var=None, bootstrap_coeffs_SE=None, bootstrap_coeffs_t=None, bootstrap_coeffs_p=None):
         self.model = model
         self.coefficients = coefficients
@@ -176,6 +176,6 @@ def loss(Y, X, lamb, betas):
     -------
     loss : Computed loss
     """
-    
+
     loss = sse(Y, X, betas) + lamb * np.sum(np.abs(betas))
     return loss
