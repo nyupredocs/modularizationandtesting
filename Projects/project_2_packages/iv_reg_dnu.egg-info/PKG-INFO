@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: iv-reg-dnu
+Version: 0.0.1
+Summary: Package for Instrumental Variable Estimation
+Home-page: https://github.com/jettpettus/modularizationandtesting
+Author: Best Group 2
+License: UNKNOWN
+Description: # iv-reg package
+        
+        This is a simple package to perform instrumental variable estimation. 
+        
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
