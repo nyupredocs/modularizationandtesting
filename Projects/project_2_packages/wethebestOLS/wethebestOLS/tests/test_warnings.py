@@ -1,6 +1,6 @@
 import sys
 import os
-import scipy
+
 import numpy as np
 import unittest
 sys.path.append(os.path.abspath('..'))
