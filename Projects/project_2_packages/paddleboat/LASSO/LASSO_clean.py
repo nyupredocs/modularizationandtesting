@@ -75,7 +75,7 @@ def beta_lasso(X, Y, lamb):
     return(coefficients)
 
 
-def lasso_se_boot(X, Y, lamb, betas, n_iter = 100, progress_disable = False):
+def lasso_fit(X, Y, lamb, n_iter = 100, progress_disable = False):
         """
         Estimate Lasso standard errors through bootstrapping
 
@@ -84,13 +84,18 @@ def lasso_se_boot(X, Y, lamb, betas, n_iter = 100, progress_disable = False):
         Y : Nx1 Matrix
         X : Matrix
         lamb : Lambda value to use for L2
-        betas : Vector of estimated coefficients
         n_ter : Integer of number of iterations for bootstrapping
         progress_disable : Disable option for tqdm progress bar
 
         Returns
         -------
-        boot_se : vector of standard errors
+        results : Results wrapper with lasso results
+                  coefficients = Lasso coefficients from full sample
+                  bootstrap_coeffs = Lasso coefficients from bootstrapping procedure
+                  bootstrap_coeffs_var = Coefficient variance from bootstrapping
+                  bootstrap_coeffs_SE = Coefficient standard errors from bootstrapping
+                  bootstrap_coeffs_t = T-stats (from bootstrapping SE)
+                  bootstrap_coeffs_p = P-values
         """
     
     nobs = X.shape[0]
@@ -100,6 +105,7 @@ def lasso_se_boot(X, Y, lamb, betas, n_iter = 100, progress_disable = False):
 
     for b_iter in tqdm(range(0, n_iter), disable=progress_disable):
         b_index = np.random.choice(range(0, nobs), nobs, replace = True)
+        Y, X= Y.iloc[b_index], X.iloc[b_index]
 
         b_beta_hat = beta_lasso(Y, X, lamb)
 
@@ -120,42 +126,17 @@ def lasso_se_boot(X, Y, lamb, betas, n_iter = 100, progress_disable = False):
     # Bootstrapped t-stats for null that coefficient = 0
     ## note that we use the coefficient estimates from the full sample 
     ## but the variance from the bootstrapping procedure
-    beta_hat_boot_t = beta_lasso(Y, X) / beta_hat_boot_SE
+    beta_hat_boot_t = beta_lasso(Y, X, lamb) / beta_hat_boot_SE
 
     # Bootstrapped p values from t test (two-sided)
     beta_hat_boot_p = pd.Series(2 * (1- t.cdf(np.abs(beta_hat_boot_t), df = nobs - K)), beta_hat_boot_t.index)
 
+    return Results_wrap(model = print('Lasso, lambda =', lamb), 
+                        coefficients = beta_lasso(Y, X, lamb),
+                        bootstrap_coeffs = beta_hat_boots,
+                        bootstrap_coeffs_var = beta_hat_boot_var,
+                        bootstrap_coeffs_SE = beta_hat_boot_SE,
+                        bootstrap_coeffs_t = beta_hat_boot_t,
+                        bootstrap_coeffs_p = beta_hat_boot_p)
 
-def pick_lowest_lambda(X, Y):
-        """
-        Compute loss function
 
-        Parameters
-        ----------
-        Y : Nx1 Matrix
-        X : Matrix (no intercept column)
-        lamb : Lambda value to use for L1
-        betas : Vector of estimated coefficients
-
-        Returns
-        -------
-        loss : Computed loss
-        """
-    lambs = range(0, 1, 100)
-    losses = list()
-
-    for l in lambs:
-        coeffs = get_coeffs_given_lambda(X, Y, l)
-        SSE = get_sse(Y, X, coeffs)
-        loss = loss_function(SSE, l, coeffs)
-        losses.append(loss)
-
-    min_loss = min(losses)
-    lowest_lambda = loss(min_loss_position_in_list)
-
-    print("Working!")
-    return(lowest_lamb)
-
-def main():
-    """Performs OLS, prints output to table"""
-    print("Working!")
