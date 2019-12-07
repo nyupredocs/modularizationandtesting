@@ -20,9 +20,9 @@ print(beta_iv_hat)
 
 
 sigma = calculate_sigma(mat_z, mat_x, mat_y, beta_iv_hat)
-
+print("sigma")
 print(sigma)
 
-
+print("var beta")
 var_beta = calculate_var_beta(sigma, mat_x, mat_z)
 print(var_beta)
