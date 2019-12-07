@@ -12,6 +12,12 @@ own method, but you will also need to find at least one dataset that it can be u
 for -- Additionally, you'll need to submit a PR to this repository to add the method
 and dataset to the table below.
 
+Updated requirements:
+
+* Basic statistical model that can generate estimates, standard errors, and confidence intervals
+* Preferably quite simple
+* Two models (maybe one is OLS/one depends on optimization to fit)
+
 
 | Method                                               | Potential datasets                                                     |
 | :--------------------------------------------------- | :--------------------------------------------------------------------- |

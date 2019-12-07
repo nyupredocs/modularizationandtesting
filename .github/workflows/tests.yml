@@ -1,0 +1,19 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Print Directory
+      run: echo $(pwd)
+    - name: Docker
+      run: docker ps; docker ps -a
+    - name: Install numoy because I don't understand dependencies
+      run: pip install numpy
+    - name: Run Tests
+      run: python3 -m unittest discover -s Projects/project_2_packages
