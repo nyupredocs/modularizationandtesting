@@ -45,6 +45,7 @@ def calc_mean_sse(y, X, β):
 
 def calc_se(y, X, β):
         mean_sse = calc_mean_sse(y, X, β)
+        XpX = X.T@X
         σ2 = mean_sse*np.linalg.inv(XpX)
         se = np.sqrt(np.diag(σ2))
         return se
