@@ -19,32 +19,32 @@ def ols(y, X):
     se : np.array((K, 1), float64)
         standard errors of the coefficients
     """
-
     if matrix_rank(X) == X.shape[1]:
+        β = calc_beta(y, X)
+        se = calc_se(y, X, β)
+    else:
+        print("Error: matrix does not have full rank, returning nans")
+        β   = np.nan
+        se  = np.nan
+    return β, se
 
-        # Solve for beta hat
+def calc_beta(y, X):
         XpX = X.T@X
         Xpy = X.T@y
         β = np.linalg.inv(XpX)@Xpy
+        return β
 
-        # Calculate mean squared error
+def calc_mean_sse(y, X, β):
         pred = X@β
         resid = y - pred
         sse = sum(resid**2)[0]
         N = X.shape[0]
         K = X.shape[1]
         mean_sse = sse/(N - K)
+        return mean_sse
 
-
-        # Calculate vcv matrix for beta
+def calc_se(y, X, β):
+        mean_sse = calc_mean_sse(y, X, β)
         σ2 = mean_sse*np.linalg.inv(XpX)
-        # Extract SEs from the diagnal
         se = np.sqrt(np.diag(σ2))
-
-    else:
-
-        print("Error: matrix does not have full rank, returning nans")
-        β   = np.nan
-        se  = np.nan
-
-    return β, se
+        return se
