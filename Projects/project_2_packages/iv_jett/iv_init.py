@@ -37,18 +37,18 @@ def projection_matrix(b):
     P_b = b @ np.linalg.inv((np.transpose(b) @ b)) @ np.transpose(b)
     return P_b
 
-def estimate_beta_iv(a, b, c, nocons=""):
+def estimate_beta_iv(a, b, c, nocons = False):
     '''
     Inputs:
         a (matrix) -- x
         b (matrix) -- z
         c (matrix) -- y
     '''
-    if nocons != "" and nocons != "nocons":
+    if nocons != True and nocons != False:
         raise Exception('nocons option misspecified')
 
     check_dim(a, b, c)
-    if nocons == "":
+    if nocons == False:
         N = a.shape[0]
         a_1 = np.ones((N,1))
         a = np.hstack((a_1,a))
@@ -62,13 +62,13 @@ def estimate_beta_iv(a, b, c, nocons=""):
     b_3 = np.transpose(a) @ proj @ c
     betas_all = b_2 @ b_3
 
-    if nocons == "":
+    if nocons == False:
         cons = betas_all[0]
         betas = betas_all[1:]
         print("_cons: " + str(cons))
         for i in range(0, len(betas)):
             print("beta_"+ str(i) + " :" + str(betas[i]))
-    elif nocons == "nocons":
+    elif nocons == True:
         betas = betas_all[0:]
         for i in range(0, len(betas)):
             print("beta_"+ str(i) + " :" + str(betas[i]))
