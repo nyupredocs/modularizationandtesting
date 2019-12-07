@@ -20,16 +20,16 @@ def ols(y, X):
         standard errors of the coefficients
     """
     if matrix_rank(X) == X.shape[1]:
-        β = calc_beta(y, X)
-        se = calc_se(y, X, β)
+        XpX = XpX = X.T@X
+        β = calc_beta(y, X, XpX)
+        se = calc_se(y, X, β, XpX)
     else:
         print("Error: matrix does not have full rank, returning nans")
         β   = np.nan
         se  = np.nan
     return β, se
 
-def calc_beta(y, X):
-        XpX = X.T@X
+def calc_beta(y, X, XpX):
         Xpy = X.T@y
         β = np.linalg.inv(XpX)@Xpy
         return β
@@ -43,9 +43,8 @@ def calc_mean_sse(y, X, β):
         mean_sse = sse/(N - K)
         return mean_sse
 
-def calc_se(y, X, β):
+def calc_se(y, X, β, XpX):
         mean_sse = calc_mean_sse(y, X, β)
-        XpX = X.T@X
         σ2 = mean_sse*np.linalg.inv(XpX)
         se = np.sqrt(np.diag(σ2))
         return se
