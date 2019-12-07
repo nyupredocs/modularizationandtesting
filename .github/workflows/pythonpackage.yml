@@ -25,6 +25,7 @@ jobs:
         pip install .
     - name: Lint with flake8
       run: |
+        cd Projects/group3/the_package/
         pip install .
         pip install flake8
         # stop the build if there are Python syntax errors or undefined names
