@@ -26,6 +26,8 @@ class TestHPM(unittest.TestCase):
         p_a = gamma_min + (1 - gamma_min)/(1 + gamma_1*np.exp(-gamma_2*a))
         self.assertAlmostEqual(p_a, self.hpm(a, 0.0))
 
+    
+
 
 if __name__ == "__main__":
     unittest.main()
