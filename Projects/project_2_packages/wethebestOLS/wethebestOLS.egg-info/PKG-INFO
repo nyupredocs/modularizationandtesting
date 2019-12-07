@@ -1,9 +1,9 @@
 Metadata-Version: 2.1
 Name: wethebestOLS
-Version: 0.0.2
-Summary: A small example package
+Version: 0.0.3
+Summary: A package that implements OLS and logit.
 Home-page: https://github.com/pypa/sampleproject
-Author: Example Author
+Author: Group 1
 Author-email: author@example.com
 License: UNKNOWN
 Description: 

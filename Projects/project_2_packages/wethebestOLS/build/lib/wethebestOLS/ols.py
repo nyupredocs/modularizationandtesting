@@ -16,9 +16,6 @@ def ols(y, X):
     se : np.array((K, 1), float64)
         standard errors of the coefficients
     """
-    
-    import numpy as np
-    import scipy.linalg
 
     # Solve for beta hat
     XpX = X.T@X
