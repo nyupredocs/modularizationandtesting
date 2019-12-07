@@ -1,2 +1,2 @@
-from .ols import regression
-from .logit import logit
+from ols import regression
+from logit import logit
