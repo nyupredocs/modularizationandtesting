@@ -11,7 +11,6 @@ matrix:
       language: python
       before_install:
           - pip install -U pip
-          - pip install -r requirements.txt
           - pip install .
           - cd Projects/project_2_packages/paddleboat
       script: python -m unittest -v
