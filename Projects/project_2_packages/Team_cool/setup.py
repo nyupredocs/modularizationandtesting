@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="OLS_team_cool", # Replace with your own username
-    version="0.0.3",
+    version="0.0.31",
     author="Team Cool",
     author_email="gen.li@yale.edu",
     description="A small example package for OLS.",

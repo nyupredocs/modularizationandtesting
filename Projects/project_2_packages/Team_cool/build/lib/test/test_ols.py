@@ -19,19 +19,22 @@ class TestOLS(unittest.TestCase):
         self.cf = 0.95
         self.model = sm.OLS(self.y,self.x)
         self.result = self.model.fit()
+        self.ourmodel = ols.OLS(self.y,self.x)
 
 # This is checking the OLS model that comes with python
     def test_beta(self):
         betacrt = self.result.params.reshape(-1,1)
-        ourmodel = ols.OLS(self.y,self.x)
 
 # assertAlmostEqual accounts for float errors
-        ourbeta = ourmodel['Beta'].reshape(-1,1)
+        ourbeta = self.ourmodel['Beta'].reshape(-1,1)
         testresults =np.testing.assert_almost_equal(betacrt,ourbeta)
         self.assertIsNone(testresults)
 
     def test_se(self):
-        self.
+        se_correct = self.result.bse.reshape(-1,1)
+        our_se = self.ourmodel.get("Standard Error").reshape(-1,1)
+        test_se_res =np.testing.assert_almost_equal(se_correct,our_se)
+        self.assertIsNone(test_se_res)
 
 
 # #This is checking the OLS model that team_cool has created
