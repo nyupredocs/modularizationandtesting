@@ -1,3 +1,7 @@
+import numpy as np
+import scipy
+from numpy.linalg import matrix_rank
+
 def ols(y, X):
     """
     This is THE BEST ols.
@@ -17,25 +21,31 @@ def ols(y, X):
         standard errors of the coefficients
     """
 
-    import numpy as np
-    import scipy.linalg
+    if matrix_rank(X) == X.shape[1]:
 
-    # Solve for beta hat
-    XpX = X.T@X
-    Xpy = X.T@y
-    β = scipy.linalg.inv(XpX)@Xpy
+        # Solve for beta hat
+        XpX = X.T@X
+        Xpy = X.T@y
+        β = np.linalg.inv(XpX)@Xpy
 
-    # Calculate mean squared error
-    pred = X@β
-    resid = y - pred
-    sse = sum(resid**2)[0]
-    N = X.shape[0]
-    K = X.shape[1]
-    mean_sse = sse/(N - K)
+        # Calculate mean squared error
+        pred = X@β
+        resid = y - pred
+        sse = sum(resid**2)[0]
+        N = X.shape[0]
+        K = X.shape[1]
+        mean_sse = sse/(N - K)
 
-    # Calculate vcv matrix for beta
-    σ2 = mean_sse*scipy.linalg.inv(XpX)
-    # Extract SEs from the diagnal
-    se = np.sqrt(np.diag(σ2))
+
+        # Calculate vcv matrix for beta
+        σ2 = mean_sse*np.linalg.inv(XpX)
+        # Extract SEs from the diagnal
+        se = np.sqrt(np.diag(σ2))
+
+    else:
+
+        print("Error: matrix does not have full rank, returning nans")
+        β   = np.nan
+        se  = np.nan
 
     return β, se
