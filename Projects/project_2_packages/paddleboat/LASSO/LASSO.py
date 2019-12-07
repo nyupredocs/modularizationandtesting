@@ -85,17 +85,16 @@ def lasso_fit(Y, X, lamb, n_iter=100, progress_disable = False):
 
     for b_iter in tqdm(range(0, n_iter), disable=progress_disable):
         b_index = np.random.choice(range(0, nobs), nobs, replace = True)
-        Y, X= pd.DataFrame(Y).iloc[b_index], pd.DataFrame(X).iloc[b_index]
+        _Y, _X = pd.DataFrame(Y).iloc[b_index], pd.DataFrame(X).iloc[b_index]
 
-        b_beta_hat = beta_lasso(Y, X, lamb)
-
+        b_beta_hat = beta_lasso(np.array(_Y), _X, lamb)
         # Saving coefficient estimates
-        beta_hat_boots[b_iter] = b_beta_hat
+        beta_hat_boots[b_iter, :] = b_beta_hat.squeeze()
 
     # Estimated coefficients from bootstrapping
     beta_hat_boots = pd.DataFrame(beta_hat_boots)
     beta_hat_boots.index.name = 'boot_iter'
-    beta_hat_boots.columns = X.columns.values.tolist()
+    #beta_hat_boots.columns = X.columns.values.tolist()
 
     # Bootstrapped variance of coefficient estimates
     beta_hat_boot_var = beta_hat_boots.var(axis=0)
@@ -119,6 +118,47 @@ def lasso_fit(Y, X, lamb, n_iter=100, progress_disable = False):
                         bootstrap_coeffs_t = beta_hat_boot_t,
                         bootstrap_coeffs_p = beta_hat_boot_p)
 
+
+
+class Results_wrap(object):
+    '''
+    Summarize the Regression Results (based of statsmodels)
+    Parameters
+    -----------
+    yname : string, optional
+        Default is `y`
+    xname : list of strings, optional
+        Default is `var_##` for ## in p the number of regressors
+    title : string, optional
+        Title for the top table. If not None, then this replaces the
+        default title
+    alpha : float
+        significance level for the confidence intervals
+    Returns
+    -------
+    smry : Summary instance
+        this holds the summary tables and text, which can be printed or
+        converted to various output formats.
+    '''
+    def __init__(self, model, coefficients, 
+        cov_type='nonrobust', bootstrap_coeffs=None, bootstrap_coeffs_var=None, bootstrap_coeffs_SE=None, bootstrap_coeffs_t=None, bootstrap_coeffs_p=None):
+        self.model = model
+        self.coefficients = coefficients
+        self.cov_type = cov_type
+        self.beta_hat_boots = bootstrap_coeffs
+        self.beta_hat_boots_var = bootstrap_coeffs_var
+        self.beta_hat_boots_SE = bootstrap_coeffs_SE
+        self.beta_hat_boots_t = bootstrap_coeffs_t
+        self.beta_hat_boots_p = bootstrap_coeffs_p
+
+    def summary(self, title=None):
+        '''
+        TO DO: PRINTABLE SUMMARY RESULTS LIKE STATSMODELS
+        '''
+        # testing that summary is callable
+        if title is None:
+            title = self.model + ' ' + "Regression Results"
+        return print(title)
 
 
 def loss(Y, X, lamb, betas):
