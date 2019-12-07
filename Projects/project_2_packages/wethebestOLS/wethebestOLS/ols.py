@@ -16,7 +16,7 @@ def ols(y, X):
     se : np.array((K, 1), float64)
         standard errors of the coefficients
     """
-    
+
     import numpy as np
     import scipy.linalg
 
@@ -30,7 +30,8 @@ def ols(y, X):
     resid = y - pred
     sse = sum(resid**2)[0]
     N = X.shape[0]
-    mean_sse = sse/(N - 1)
+    K = X.shape[1]
+    mean_sse = sse/(N - K)
 
     # Calculate vcv matrix for beta
     σ2 = mean_sse*scipy.linalg.inv(XpX)
