@@ -48,5 +48,4 @@ def ols(y, X):
         β   = np.nan
         se  = np.nan
 
-
     return β, se
