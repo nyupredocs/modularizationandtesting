@@ -1,5 +1,6 @@
 pandas
 numpy
+statsmodels
 OLS_team_cool
 scipy
 hyperopt
