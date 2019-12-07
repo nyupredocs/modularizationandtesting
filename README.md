@@ -44,7 +44,7 @@ Below are some examples of scientific projects that the Python community typical
 * [Astropy](https://www.astropy.org/about.html#about-the-astropy-project)
 * [Biopython](https://biopython.org/)
 * [pyblp](https://pyblp.readthedocs.io/en/stable/)
-* [pymc](https://docs.pymc.io/) and Stan](https://mc-stan.org/)
+* [pymc](https://docs.pymc.io/) and [Stan](https://mc-stan.org/)
 * [sunpy](https://sunpy.org/)
 * [quantecon](https://quantecon.org/quantecon-py/)
 
