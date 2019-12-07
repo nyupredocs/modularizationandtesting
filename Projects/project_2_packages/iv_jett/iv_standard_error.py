@@ -14,9 +14,17 @@ def calculate_resid(Z, X, Y, beta_iv, nocons = False):
     return resid
 
 def calculate_sigma(Z, X, Y, beta_iv, nocons = False):
-
+    '''
+    Description:
+        Estimates the variance of the errors.
+    Inputs:
+        Z (matrix) -- Instrumental Variables
+        X (matrix) -- Endogenous Variables
+        Y (matrix) -- Outcome Variable
+        beta_iv -- IV results
+        nocons -- Option for constant (default False)
+    '''
     N = Z.shape[0]
-
     if nocons == False:
         X_constant = np.ones((N, 1))
         X = np.hstack((X_constant, X))
@@ -27,9 +35,20 @@ def calculate_sigma(Z, X, Y, beta_iv, nocons = False):
     return np.sqrt(sigma_iv)
 
 def calculate_var_beta(sigma, X, Z, resid, nocons = False, robust = False):
-    
-    N = Z.shape[0]
 
+    '''
+    Description:
+        Calculates the variance of beta, the IV estimator
+    Inputs:
+        sigma
+        Z (matrix) -- Instrumental Variables
+        X (matrix) -- Endogenous Variables
+        nocons -- Option for constant (default False)
+    Ouputs:
+        se_beta (array) -- Standard error
+    '''
+
+    N = Z.shape[0]
     if nocons == False:
         X_constant = np.ones((N, 1))
         X = np.hstack((X_constant, X))
