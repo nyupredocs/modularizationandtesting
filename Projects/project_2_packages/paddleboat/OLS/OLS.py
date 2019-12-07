@@ -49,7 +49,7 @@ def resids(Y, X):
 
 def Sigma(Y,X):
     '''
-    Estimate OLS variance-covariance matrix
+    ≈
 
     Parameters
     ----------
@@ -58,7 +58,7 @@ def Sigma(Y,X):
 
     Returns
     -------
-    e : var-cov matrix as pandas df
+    Sigma : var-cov matrix as pandas df
     '''
     e = resids(Y,X)
     std_hat = e.dot(e.T)/(X.shape[0]-X.shape[1])
