@@ -1,6 +1,11 @@
+import sys
+sys.path.insert(0,'../OLS')
+
 import numpy as np
 import transcripty as tpy
 import unittest
+from OLS import beta_ols
+
 
 
 class TestHPM(unittest.TestCase):
