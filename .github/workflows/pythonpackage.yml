@@ -22,6 +22,7 @@ jobs:
         cd Projects/group3/the_package/
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install .
     - name: Lint with flake8
       run: |
         pip install flake8
@@ -32,5 +33,4 @@ jobs:
     - name: Test with unittest
       run: |
         cd Projects/group3/the_package/
-        pip install .
         python -m unittest
