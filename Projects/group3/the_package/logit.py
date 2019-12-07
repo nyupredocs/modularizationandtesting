@@ -156,9 +156,9 @@ def logit(Y, X):
     coef = beta.x
     test_status = beta.success
  
-	# Standard errors
-	cov = -dlogit(coef, Y, X):
+    # Standard errors
+    cov = -dlogit(coef, Y, X):
     se = np.sqrt(cov.diagonal().T) 
-	
+    
     # Return
     return (coef, se, test_status)
