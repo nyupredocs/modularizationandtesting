@@ -89,6 +89,6 @@ def optimization(objectiveFunction, Y,X,bbeta):
         betaHat
 
     '''
-    betahat = minimize(lambda beta: objectiveFunction(Y,X, beta), bbeta, method='nelder-mead',options={'xtol': 1e-8, 'disp': True})
+    betaHat = minimize(lambda beta: objectiveFunction(Y,X, beta), bbeta, method='nelder-mead',options={'xtol': 1e-8, 'disp': True})
 
     return betaHat
