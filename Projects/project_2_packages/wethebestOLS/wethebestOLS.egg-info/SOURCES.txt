@@ -1,6 +1,11 @@
 README.md
 setup.py
+wethebestOLS/__init__.py
 wethebestOLS.egg-info/PKG-INFO
 wethebestOLS.egg-info/SOURCES.txt
 wethebestOLS.egg-info/dependency_links.txt
 wethebestOLS.egg-info/top_level.txt
+wethebestOLS/logit/__init__.py
+wethebestOLS/logit/logit.py
+wethebestOLS/ols/__init__.py
+wethebestOLS/ols/ols.py
