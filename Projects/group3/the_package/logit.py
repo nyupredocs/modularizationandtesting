@@ -152,9 +152,13 @@ def logit(Y, X):
         loglike, beta0, args = (Y, X), method = "BFGS", hess = logithessian
     )
 
-    # Output values
+    # Coefficients
     coef = beta.x
     test_status = beta.success
  
+	# Standard errors
+	cov = -dlogit(coef, Y, X):
+    se = np.sqrt(cov.diagonal().T) 
+	
     # Return
-    return (coef, test_status)
+    return (coef, se, test_status)
