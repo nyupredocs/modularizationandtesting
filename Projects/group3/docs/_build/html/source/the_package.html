@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>the_package package &#8212; the_package 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="the-package-package">
+<h1>the_package package<a class="headerlink" href="#the-package-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-the_package.logit">
+<span id="the-package-logit-module"></span><h2>the_package.logit module<a class="headerlink" href="#module-the_package.logit" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="the_package.logit.dlogit">
+<code class="sig-prename descclassname">the_package.logit.</code><code class="sig-name descname">dlogit</code><span class="sig-paren">(</span><em class="sig-param">beta</em>, <em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#the_package.logit.dlogit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derivative of logit function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>beta</strong> (<em>matrix.</em>) – N x 1 matrix of the coefficients.
+N is the number of observations.</p></li>
+<li><p><strong>Y</strong> (<em>matrix</em>) – N x 1 matrix of the dependent variable.
+N is the number of observations.</p></li>
+<li><p><strong>X</strong> (<em>matrix</em>) – N x K matrix of the independent variables.
+N is the number of observations.
+K is the number of independent variables.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dlogit</strong> – Derivative of the logit function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="the_package.logit.inverselogit">
+<code class="sig-prename descclassname">the_package.logit.</code><code class="sig-name descname">inverselogit</code><span class="sig-paren">(</span><em class="sig-param">beta</em>, <em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#the_package.logit.inverselogit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse of logit function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>beta</strong> (<em>matrix.</em>) – N x 1 matrix of the coefficients.
+N is the number of observations.</p></li>
+<li><p><strong>Y</strong> (<em>matrix</em>) – N x 1 matrix of the dependent variable.
+N is the number of observations.</p></li>
+<li><p><strong>X</strong> (<em>matrix</em>) – N x K matrix of the independent variables.
+N is the number of observations.
+K is the number of independent variables.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>inverse</strong> – Inverse of logit function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="the_package.logit.logit">
+<code class="sig-prename descclassname">the_package.logit.</code><code class="sig-name descname">logit</code><span class="sig-paren">(</span><em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#the_package.logit.logit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logistic regression of Y on X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Y</strong> (<em>matrix</em>) – N x 1 matrix of the dependent variable.
+N is the number of observations.</p></li>
+<li><p><strong>X</strong> (<em>matrix</em>) – N x K matrix of the independent variables.
+N is the number of observations.
+K is the number of independent variables.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>(coef, test_status)</em></p></li>
+<li><p><strong>coef</strong> (<em>matrix</em>) – K x 1 matrix of coefficients</p></li>
+<li><p><strong>test_status</strong> (<em>string</em>) – Status of the optimization: Success or False</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="the_package.logit.logithessian">
+<code class="sig-prename descclassname">the_package.logit.</code><code class="sig-name descname">logithessian</code><span class="sig-paren">(</span><em class="sig-param">beta</em>, <em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#the_package.logit.logithessian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hessian matrix of logit function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>beta</strong> (<em>matrix.</em>) – N x 1 matrix of the coefficients.
+N is the number of observations.</p></li>
+<li><p><strong>Y</strong> (<em>matrix</em>) – N x 1 matrix of the dependent variable.
+N is the number of observations.</p></li>
+<li><p><strong>X</strong> (<em>matrix</em>) – N x K matrix of the independent variables.
+N is the number of observations.
+K is the number of independent variables.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>hessian</strong> – Hessian matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="the_package.logit.loglike">
+<code class="sig-prename descclassname">the_package.logit.</code><code class="sig-name descname">loglike</code><span class="sig-paren">(</span><em class="sig-param">beta</em>, <em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#the_package.logit.loglike" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log likelihood function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>beta</strong> (<em>matrix.</em>) – N x 1 matrix of the coefficients.
+N is the number of observations.</p></li>
+<li><p><strong>Y</strong> (<em>matrix</em>) – N x 1 matrix of the dependent variable.
+N is the number of observations.</p></li>
+<li><p><strong>X</strong> (<em>matrix</em>) – N x K matrix of the independent variables.
+N is the number of observations.
+K is the number of independent variables.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>logvalue</strong> – Log likelihood function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-the_package.ols">
+<span id="the-package-ols-module"></span><h2>the_package.ols module<a class="headerlink" href="#module-the_package.ols" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="the_package.ols.regression">
+<code class="sig-prename descclassname">the_package.ols.</code><code class="sig-name descname">regression</code><span class="sig-paren">(</span><em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#the_package.ols.regression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Regress Y on X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Y</strong> (<em>matrix</em>) – N x 1 matrix of the dependent variable.
+N is the number of observations.</p></li>
+<li><p><strong>X</strong> (<em>matrix</em>) – N x K matrix of the independent variables.
+N is the number of observations.
+K is the number of independent variables.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>(coef, se)</em></p></li>
+<li><p><strong>coef</strong> (<em>matrix</em>) – K x 1 matrix of coefficients.</p></li>
+<li><p><strong>se</strong> (<em>matrix</em>) – K x 1 matrix of standard errors.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-the_package">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-the_package" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">the_package</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Group 3.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/the_package.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
