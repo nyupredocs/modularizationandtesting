@@ -2,29 +2,29 @@ import numpy as np
 
 def regression(Y, X):
     """ Regress Y on X.
-    
-	Parameters
-	----------
+
+    Parameters
+    ----------
     Y : matrix 
-		N x 1 matrix
-		N is the number of observations
+        N x 1 matrix of the dependent variable.
+        N is the number of observations.
         
     X : matrix
-		N x K matrix
-		N is the number of observations
-		K is the number of independent variables
+        N x K matrix of the independent variables.
+        N is the number of observations.
+        K is the number of independent variables.
         
-	Returns
-	-------
-	(coef, se)
-	
-	coef : matrix
-		K x 1 matrix of coefficients
-	
-	se : matrix
-		K x 1 matrix of standard errors
-    """
+    Returns
+    -------
+    (coef, se)
     
+    coef : matrix
+        K x 1 matrix of coefficients.
+    
+    se : matrix
+        K x 1 matrix of standard errors.
+    """
+
     # Get degrees of freedom
     N = np.size(Y, 0)
     K = np.size(X, 1)
@@ -43,5 +43,3 @@ def regression(Y, X):
     
     # Return
     return(coef, se.reshape(K, 1))
-	
-	
