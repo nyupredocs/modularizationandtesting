@@ -1,6 +1,3 @@
-import numpy as np
-import scipy
-
 def ols(y, X):
     """
     This is THE BEST ols.
@@ -20,9 +17,6 @@ def ols(y, X):
         standard errors of the coefficients
     """
 
-    import numpy as np
-    import scipy.linalg
-
     # Solve for beta hat
     XpX = X.T@X
     Xpy = X.T@y
@@ -33,8 +27,7 @@ def ols(y, X):
     resid = y - pred
     sse = sum(resid**2)[0]
     N = X.shape[0]
-    k = X.shape[1]
-    mean_sse = sse/(N - k)
+    mean_sse = sse/(N - 1)
 
     # Calculate vcv matrix for beta
     σ2 = mean_sse*scipy.linalg.inv(XpX)
