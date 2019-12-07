@@ -25,6 +25,7 @@ jobs:
         pip install .
     - name: Lint with flake8
       run: |
+        pip install .
         pip install flake8
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
@@ -33,4 +34,5 @@ jobs:
     - name: Test with unittest
       run: |
         cd Projects/group3/the_package/
+        pip install .
         python -m unittest
