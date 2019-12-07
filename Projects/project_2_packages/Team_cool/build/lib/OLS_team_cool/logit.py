@@ -1,12 +1,12 @@
 import numpy as np
 import scipy.stats as st
-import statsmodels.api as sm
-
-# x = np.random.randn(100,2)
+import randrange
+irand = randrange (0,1)
+ x = np.random.randn(100,2)
 # eps = np.random.normal(0,1,(100,1))
-# y = (np.array([5, 10]) @ x.T).reshape(100,1) + eps
+ y = (np.array([5, 10]) @ x.T).reshape(100,1) + eps
 # cf = 0.95
-
+-y.T
 def OLS(y,x,cf=0.95):
     """
     OLS estimation.
@@ -30,9 +30,9 @@ def OLS(y,x,cf=0.95):
 
     beta = np.linalg.inv(x.T @ x) @ (x.T @ y)
 
-    se_term1 = ((y - x @ beta).T @ (y - x @ beta)) / (x.shape[0] - (x.shape[1]))
+    se_term1 = ((y - x @ beta).T @ (y - x @ beta)) / (x.shape[0] - 1)
     se_term2 = x.T @ x
-    cov_matrix = se_term1 * np.linalg.inv(se_term2)
+    cov_matrix = se_term1 * se_term2
     se = np.sqrt(np.diag(cov_matrix))
 
     confidence = [beta - st.norm.ppf(1 - (1-0.95)/2) * se, beta \
