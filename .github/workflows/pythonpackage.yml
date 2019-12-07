@@ -17,11 +17,9 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Change directory
-      run: |
-        cd Projects/group3/the_package/
     - name: Install dependencies
       run: |
+        cd Projects/group3/the_package/
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Lint with flake8
@@ -33,5 +31,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with unittest
       run: |
+        cd Projects/group3/the_package/
         pip install pytest
         python -m unittest
