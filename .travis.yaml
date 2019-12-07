@@ -2,13 +2,12 @@ language: python
 python:
   - 3.7
 before_install:
+  - cd Projects/project_2_packages/wethebestOLS
   - python --version
   - pip install -U pip
 install:
   - pip install -r requirements.txt
   - pip install .
 script:
-  - cd Projects/project_2_packages/wethebestOLS/wethebestOLS/tests/
+  - cd wethebestOLS/tests/
   - python -m unittest
-after_success:
-  - codecov # submit coverage
