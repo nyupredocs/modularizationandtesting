@@ -1,212 +1,142 @@
 import pandas as pd
 import numpy as np
+import OLS as ols
+from sklearn import preprocessing
+import tqdm
 
-def get_betas(X, Y):
-    """Get betas (according to OLS formula)"""
-    betas = (np.transpose(X) * X)^(-1) * (np.transpose(X) * Y) # transpose is a numpy function
+def sse(Y, X, betas):
+        '''
+        Get sum of square errors
 
-    print("Working!")
-    return betas
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix
+        betas : Vector of estimated coefficients
 
-def get_residuals(betas, X, Y):
-    """Get residuals (according to OLS formula)"""
-    y_hat = betas * X
-    residuals = Y - y_hat
-
-    print("Working!")
-    return residuals
-
-def get_n(X, Y):
-    """Get N, check independent vs dependent variables"""
-    n_X = length(X)
-    n_Y = length(Y)
-
-    if n_X == n_Y:
-        n = n_X
-    else:
-        print("Error!")
-
-    print("Working!")
-    return n
-
-def get_ses(residuals, X, Y):
-    """Get SEs (according to OLS formula)"""
-    residuals2 = residuals^2
-    XX = (np.transpose(X) * X)^(-1) # transpose is not a real function
-    N = get_n(X, Y)
-    ses = (residuals2 / (N-1)) * XX
-
-    print("Working!")
-    return ses
-
-def get_r2(Y, X, betas):
-    """Get R^2"""
-    y_hat = X * betas
-    y_bar = mean(y)
-
-    SSR = sum((y_hat - y_bar)^2)
-    SST = sum((y - y_bar)^2)
-
-    r2 = SSR / SST
-
-    print("Working!")
-    return r2
-
-def get_sse(Y, X, betas):
-    """Get sum of squared errors"""
-    y_hat = X * beta
-    sse = (Y - y_hat) ** 2
-
-    print("Working!")
+        Returns
+        -------
+        sse : Sum of square errors
+        '''
+   
+    e = betas.dot(X.values.T)-Y
+    sse = np.sum(e**2)
     return sse
 
-def get_loss_function(SSE, lamb, betas):
-    """Get loss function"""
-    betas_no_intercept = betas[1:len(betas)]
-    loss_function = SSE + lamb * np.sum(np.abs(betas_no_intercept))
 
-    print("Working!")
-    return loss_function
+def loss(Y, X, lamb, betas):
+        """
+        Compute loss function
 
-def get_coeffs_given_lambda(X, Y, lamb):
-    Z = # STANDARDIZED X
-    Y_c = # CENTERED Y
-    coefficients = np.linalg.inv(Z.transpose().dot(Z).values() + lamb * np.identity(X.shape[1])).dot(Z.transpose().dot(Y_c))
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix (no intercept column)
+        lamb : Lambda value to use for L2
+        betas : Vector of estimated coefficients
+
+        Returns
+        -------
+        loss : Computed loss
+        """
+    if np.sum(X[1]) == len(X[1]):
+        return print('ERROR: X should not have an intercept')
+    
+    loss = sse(Y, X, betas) + lamb * np.sum(np.abs(betas))
+    return loss
+
+
+def beta_lasso(X, Y, lamb):
+        """
+        Compute lasso coeffs
+
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix (no intercept column)
+        lamb : Lambda value to use for L2
+
+        Returns
+        -------
+        coefficients : Vector of Lasso coefficients
+
+        Note
+        ----
+        For simplicity we use matrix inverses,
+        which are not computationally efficient at O(p^3).
+        SVD would be a more efficient approach.
+        """
+    Z = preprocessing.scale(X)
+    Y_c = Y - np.mean(Y)
+    
+    left = np.linalg.inv(Z.transpose().dot(Z).values() + lamb * np.identity(X.shape[1]))
+    right = Z.transpose().dot(Y_c)
+    coefficients = left.dot(right)
     return(coefficients)
 
-def pick_lowest_lambda(X, Y):
-    """Pick lowest lambda"""
-    lambs = range(0, 1, 100)
-    losses = list()
 
-    for l in lambs:
-        coeffs = get_coeffs_given_lambda(X, Y, l)
-        SSE = get_sse(Y, X, coeffs)
-        loss = loss_function(SSE, l, coeffs)
-        losses.append(loss)
+def lasso_fit(X, Y, lamb, n_iter = 100, progress_disable = False):
+        """
+        Estimate Lasso standard errors through bootstrapping
 
-    min_loss = min(losses)
-    lowest_lambda = loss(min_loss_position_in_list)
+        Parameters
+        ----------
+        Y : Nx1 Matrix
+        X : Matrix
+        lamb : Lambda value to use for L2
+        n_ter : Integer of number of iterations for bootstrapping
+        progress_disable : Disable option for tqdm progress bar
 
-    print("Working!")
-    return(lowest_lamb)
+        Returns
+        -------
+        results : Results wrapper with lasso results
+                  coefficients = Lasso coefficients from full sample
+                  bootstrap_coeffs = Lasso coefficients from bootstrapping procedure
+                  bootstrap_coeffs_var = Coefficient variance from bootstrapping
+                  bootstrap_coeffs_SE = Coefficient standard errors from bootstrapping
+                  bootstrap_coeffs_t = T-stats (from bootstrapping SE)
+                  bootstrap_coeffs_p = P-values
+        """
+    
+    nobs = X.shape[0]
+    K = int(X[1] - 1)
 
-def main():
-    """Performs OLS, prints output to table"""
-    print("Working!")
-import pandas as pd
-import numpy as np
+    beta_hat_boots = np.zeros((n_iter, K))
 
-def get_betas(X, Y):
-    '''
-        Get betas (according to OLS formula)
-        '''
-    betas = (np.transpose(X) * X)^(-1) * (np.transpose(X) * Y) # transpose is a numpy function
+    for b_iter in tqdm(range(0, n_iter), disable=progress_disable):
+        b_index = np.random.choice(range(0, nobs), nobs, replace = True)
+        Y, X= Y.iloc[b_index], X.iloc[b_index]
 
-    print("Working!")
-    return betas
+        b_beta_hat = beta_lasso(Y, X, lamb)
 
-def get_residuals(betas, X, Y):
-    '''
-        Get residuals (according to OLS formula)
-        '''
-    y_hat = betas * X
-    residuals = Y - y_hat
+        # Saving coefficient estimates
+        beta_hat_boots[b_iter] = b_beta_hat
 
-    print("Working!")
-    return residuals
+    # Estimated coefficients from bootstrapping
+    beta_hat_boots = pd.DataFrame(beta_hat_boots)
+    beta_hat_boots.index.name = 'boot_iter'
+    beta_hat_boots.columns = X.columns.values.tolist()
 
-def get_n(X, Y):
-    '''
-        Get N, check independent vs dependent variables
-        '''
-    n_X = length(X)
-    n_Y = length(Y)
+    # Bootstrapped variance of coefficient estimates
+    beta_hat_boot_var = beta_hat_boots.var(axis=0)
 
-    if n_X == n_Y:
-        n = n_X
-    else:
-        print("Error!")
+    # Bootstrapped SE of coefficient estimates
+    beta_hat_boot_SE = np.sqrt(beta_hat_boot_var)
 
-    print("Working!")
-    return n
+    # Bootstrapped t-stats for null that coefficient = 0
+    ## note that we use the coefficient estimates from the full sample 
+    ## but the variance from the bootstrapping procedure
+    beta_hat_boot_t = beta_lasso(Y, X, lamb) / beta_hat_boot_SE
 
-def get_ses(residuals, X, Y):
-    '''
-        Get SEs (according to OLS formula)
-        '''
-    residuals2 = residuals^2
-    XX = (np.transpose(X) * X)^(-1) # transpose is not a real function
-    N = get_n(X, Y)
-    ses = (residuals2 / (N-1)) * XX
+    # Bootstrapped p values from t test (two-sided)
+    beta_hat_boot_p = pd.Series(2 * (1- t.cdf(np.abs(beta_hat_boot_t), df = nobs - K)), beta_hat_boot_t.index)
 
-    print("Working!")
-    return ses
+    return Results_wrap(model = print('Lasso, lambda =', lamb), 
+                        coefficients = beta_lasso(Y, X, lamb),
+                        bootstrap_coeffs = beta_hat_boots,
+                        bootstrap_coeffs_var = beta_hat_boot_var,
+                        bootstrap_coeffs_SE = beta_hat_boot_SE,
+                        bootstrap_coeffs_t = beta_hat_boot_t,
+                        bootstrap_coeffs_p = beta_hat_boot_p)
 
-def get_r2(Y, X, betas):
-    '''
-        Get R^2
-        '''
-    y_hat = X * betas
-    y_bar = mean(y)
 
-    SSR = sum((y_hat - y_bar)^2)
-    SST = sum((y - y_bar)^2)
-
-    r2 = SSR / SST
-
-    print("Working!")
-    return r2
-
-def get_sse(Y, X, betas):
-    '''
-        Get sum of squared errors'''
-    y_hat = X * betas
-    sse = (Y - y_hat) ** 2
-
-    print("Working!")
-    return sse
-
-def get_loss_function(SSE, lamb, betas):
-    '''
-        Get loss function
-        '''
-    betas_without_intercept = betas[1:length(betas)]
-    loss_function = SSE + lamb * sum(abs(betas_without_intercept))
-
-    print("Working!")
-    return loss_function
-
-def get_coefficients_given_lambda(lamb):
-    '''
-        Get coefficients
-        '''
-    return(coefficients)
-
-def pick_lowest_lamda():
-    '''
-        Pick lowest lambda
-        '''
-    lambs = [0.001, 0.01, 0.1, 0.5, 1, 2, 10]
-    l_num = length(lam)
-    pred_num = X.shape[1]
-    losses = list(length(lamb))
-
-    # prepare data for enumerate
-    coeff_a = np.zeros((l_num, pred_num))
-
-  for ind, i in enumerate(lambs):    
-        loss = loss_function(lamb)
-        list.append(loss)
-
-    min_loss = min(losses)
-    lowest_lamb = loss(min_loss_position_in_list)
-
-    print("Working!")
-    return(lowest_lamb)
-
-def main():
-    '''
-        Performs LASSO, prints output to table
-        '''
-    print("Working!")
