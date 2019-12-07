@@ -5,29 +5,10 @@ import os
 # Major-Minor-Patch (release-status)
 VERSION = '0.0.1'
 
-def write_version_py(filename=None):
-    """
-    This constructs a version file for the project
-    """
-    doc = "\"\"\"\nThis is a VERSION file and should NOT be manually altered\n\"\"\""
-    doc += "\nversion = '%s'\n" % VERSION
-
-    if not filename:
-        filename = os.path.join(os.path.dirname(__file__), 'transcripty', 'version.py')
-
-    fl = open(filename, 'w')
-    try:
-        fl.write(doc)
-    finally:
-        fl.close()
-
-# This is a file used to control the transcripty.__version__ attribute
-write_version_py()
-
 #-Meta Information-#
 #~~~~~~~~~~~~~~~~~~#
 
-DESCRIPTION = "Practice modeling package for NYU predocs program. "
+DESCRIPTION = "Practice modeling package for NYU predocs program."
 
 LONG_DESCRIPTION = """
 Practice modeling package for NYU predocs program. 
@@ -41,7 +22,7 @@ LICENSE = 'MIT'
 #~~~~~~~#
 
 setup(
-    name='transcripty',
+    name='the_package',
     packages=find_packages(),
     version=VERSION,
     description=DESCRIPTION,
@@ -55,9 +36,7 @@ setup(
     install_requires=[
         'numpy',
 		'pandas',
-		'scipy',
-		'unittest',
-		'rando'
+		'scipy'
     ],
     include_package_data=True
 )

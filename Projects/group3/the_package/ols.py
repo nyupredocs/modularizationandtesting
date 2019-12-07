@@ -163,7 +163,7 @@ def regression(Y, X):
     # Coefficients
     Q, R = np.linalg.qr(X)
     coef = get_coef(Y, Q, R)
-    
+
     predict, resid = get_predict(Y, X, coef)
   
     # Standard errors
