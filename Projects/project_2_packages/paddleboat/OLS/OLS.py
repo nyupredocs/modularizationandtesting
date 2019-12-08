@@ -61,9 +61,10 @@ def Sigma(Y,X):
     Sigma : var-cov matrix as pandas df
     '''
     e = resids(Y,X)
-    std_hat = e.dot(e.T)/(X.shape[0]-X.shape[1])
+    std_hat = e.dot(e.T)/(X.shape[1]-1)
     Sigma = std_hat*np.linalg.inv(X.transpose().dot(X).values)
     return pd.DataFrame(Sigma)
+
 
 def variance_ols(Y,X):
     '''
@@ -98,10 +99,10 @@ def r2_ols(Y, X):
     '''
 
     y_hat = beta_ols(Y,X).dot(X.values.T)
-    y_bar = np.mean(y)
+    y_bar = np.mean(Y)
     
     SSR = np.sum((y_hat - y_bar)**2)
-    SST = np.sum((y - y_bar)**2)
+    SST = np.sum((Y - y_bar)**2)
 
     r2 = SSR / SST
     return r2
@@ -130,4 +131,7 @@ def least_sq(Y, X):
     print('R-Squared:', r2_ols(Y,X))
     print('')
     print("Variance-Covariance Matrix:")
-    return Sigma(Y,X)
+    print(Sigma(Y,X))
+
+
+
