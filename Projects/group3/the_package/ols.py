@@ -129,7 +129,7 @@ def get_se(resid, R, N, K):
     cov = sigma * np.linalg.inv((R.T).dot(R))
     se = np.sqrt(cov.diagonal().T) 
     
-    return(se)
+    return(se, cov)
     
     
 def regression(Y, X):
@@ -155,6 +155,9 @@ def regression(Y, X):
     
     se : matrix
         K x 1 matrix of standard errors.
+
+    cov : matrix
+        K x K matrix of variances and covariances.
     """
 
     # Get degrees of freedom
@@ -167,7 +170,7 @@ def regression(Y, X):
     predict, resid = get_predict(Y, X, coef)
   
     # Standard errors
-    se = get_se(resid, R, N, K)
+    se, cov = get_se(resid, R, N, K)
     
     # Return
-    return(coef, se.reshape(K, 1))
+    return(coef, se.reshape(K, 1), cov)

@@ -1,3 +1,4 @@
+"""
 # Checks for collinearity
 #VIF: statsmodels.stats.outliers_influence.variance_inflation_factor (if vif > & vif < 10, likely collin)
 from statsmodels.stats.outliers_influence import variance_inflation_factor
@@ -29,3 +30,4 @@ try:
 except:
     print("Error: Covariance matrix of covariates is ill-conditioned.")
     print("Note that N/K = {} K/N = {}.".format(r1, r2))
+"""
