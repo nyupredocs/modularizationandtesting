@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from ols import regression
 import random
-from statsmodels.stats.outliers_influence import variance_inflation_factor
+# from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 
 class testOLS(unittest.TestCase):
