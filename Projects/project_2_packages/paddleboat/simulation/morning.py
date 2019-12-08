@@ -10,6 +10,9 @@ import pandas as pd
 X = random_matrix
 
 def simulation(X, Y):
+    '''
+    Draws single simulations
+    '''
     beta_hat = norm(0,1)
     sigma_hat = exp(norm(0,1))
     y_hat = norm(X * beta_hat, sigma_hat)
@@ -23,6 +26,9 @@ def simulation(X, Y):
     return a
 
 def many_simulations(X, Y, sims=100):
+    '''
+    Draws many simulations
+    '''
     u = vector(length = sims)
     for s in sims:
         simulation(X, Y)
