@@ -25,7 +25,7 @@ matrix:
         - python3 --version
         - pip3 install -U pip
         - pip3 install -r requirements.txt
-        - pip install .
+        - pip3 install .
       script: python3 -m unittest -v
     #  ====== WINDOWS =========
     - name: "Python 3.7.4 on Windows"
