@@ -14,4 +14,6 @@ def simulation(X, Y):
 
     fit = OLS.beta_ols(Y, X)
     beta_model = OLS.betas(Y,X)
-    covariance_model = OLS.covariance(Y,X)
+    covariance_model = OLS.sigma(Y,X)
+
+    a = MVN(beta_model, covariance_model)
