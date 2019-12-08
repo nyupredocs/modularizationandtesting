@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 from ols import regression
 import random
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 
 class testOLS(unittest.TestCase):
@@ -64,8 +65,27 @@ class testOLS(unittest.TestCase):
         self.assertTrue(np.size(X, 1) > np.size(X, 0))
         
         with self.assertRaises(Exception):
-            coef, se = regression(X, Y)
-            
+            coef, se = ols(X, Y)
+
+'''
+    def test_collinear(self):
+    #Check if the independent variables are collinear
+
+        X = pd.DataFrame(np.random.rand(100,10))
+        N = np.size(X,0)
+        K = np.size(X,1)           
+        vif = pd.DataFrame()
+        vif["VIF Factor"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+        vif["Column Index"] = list(range(X.shape[1]))
+        vifLikelyCollinear = vif.loc[(vif['VIF Factor']>10)]
+        try:
+            vifLikelyCollinear.size
+            error = 0
+        except:
+            error = 1
+
+        self.assertEqual(error,0)
+'''
 
 if __name__ == "__main__":
     unittest.main()
