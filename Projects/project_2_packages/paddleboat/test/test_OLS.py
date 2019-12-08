@@ -106,11 +106,11 @@ class TestHPM(unittest.TestCase):
 
         #self.assertIsNone(np.testing.assert_almost_equal(our_CoefStdErrors, stats_CoefStdErrors, decimal=1))
 
-        print(our_CoefStdErrors)
-        print(stats_CoefStdErrors)
+        #print(our_CoefStdErrors)
+        #print(stats_CoefStdErrors)
 
-        least_sq(dependent_var, independent_vars)
-        print(results.summary())
+        #least_sq(dependent_var, independent_vars)
+        #print(results.summary())
 
 
     def test_r2(self):
