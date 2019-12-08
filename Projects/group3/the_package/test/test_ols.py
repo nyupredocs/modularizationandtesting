@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 from ols import regression
 import random
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 
 class testOLS(unittest.TestCase):
@@ -51,7 +52,7 @@ class testOLS(unittest.TestCase):
         self.assertFalse(np.size(X, 0) == np.size(Y, 0))
         
         with self.assertRaises(Exception):
-            coef, se = regression(X, Y)
+            coef, se, cov = regression(X, Y)
 
     def test_too_many_vars(self):
     # Check error thrown if number of independent variables greater
@@ -64,8 +65,7 @@ class testOLS(unittest.TestCase):
         self.assertTrue(np.size(X, 1) > np.size(X, 0))
         
         with self.assertRaises(Exception):
-            coef, se = regression(X, Y)
-            
+            coef, se, cov = regression(X, Y)
 
 if __name__ == "__main__":
     unittest.main()
