@@ -78,7 +78,11 @@ find.market.price <- function(price){
 
 markets <- 50
 prices <- punif(0, 1, 50)
-market_matrix <- data.frame()
+market_matrix <- data.frame(
+  quantity = vector(markets),
+  prices = prices,
+  demand_shocks = demands.shocks(n = markets)
+)
 
 for (market in markets) {
   find.market.price(price = prices[market])
