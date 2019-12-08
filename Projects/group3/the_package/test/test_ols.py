@@ -52,7 +52,7 @@ class testOLS(unittest.TestCase):
         self.assertFalse(np.size(X, 0) == np.size(Y, 0))
         
         with self.assertRaises(Exception):
-            coef, se = ols(X, Y)
+            coef, se = regression(X, Y)
 
     def test_too_many_vars(self):
     # Check error thrown if number of independent variables greater
