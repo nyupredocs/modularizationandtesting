@@ -22,70 +22,35 @@ lapply(packages, library, character.only = TRUE)
 ####################### Functions ######################
 ########################################################
 
-alpha <- 3
-delta <- -2
-gamma <- 1
-psi <- 4
+Markets <- 50
 
-n <- 1000
-
-price <- uniform(0, 1)
-
-
-supply.shocks <- function(epsilon, n=n){
-  eta <- rnorm(0, 1)
-  z <- epsilon + eta
-  
-  return(z)
-}
-
-
-demand.shocks <- function(epsilon, n=n){
-  eta <- rnorm(0, 1)
-  z <- epsilon + eta
-  
-  return(z)
-}
-
-
-supply.function <- function(gamma, psi, price){
-  epsilon <- rnorm(0, 1)
-  q <- gamma + psi * price + supply.shocks(epsilon)
-  
-  return(q)
-}
-
-
-demand.function <- function(alpha, gamma, price, n){
-  epsilon <- rnorm(0, 1)
-  q <- alpha + gamma * price + demand.shocks(epsilon)
-  
-  return(q)
-}
-
-
-find.market.price <- function(price){
-  q_d <- demand.function(alpha, delta, price, n)
-  q_s <- supply.function(gamma, psi, price, n)
-  
-  while (sum(abs(q_d - q_s)) > 0.05) {
-    p <- p + 0.1 * (q_d - q_s)
+demand <- function(alpha, delta, price, demand_shock) {
+  if(delta > 0) {
+    stop("Demand curves slope downward, sorry AOC")
   }
-  
-  return(p)
+  alpha + delta * price + demand_shock
 }
 
+supply <- function(gamma, psi, price, supply_shock) {
+  if(psi < 0) {
+    stop("Supply curves slope downward, sorry el presidente")
+  }
+  gamma + psi * price + supply_shock
+}
 
-markets <- 50
-prices <- punif(0, 1, 50)
-market_matrix <- data.frame(
-  quantity = vector(markets),
-  prices = prices,
-  demand_shocks = demands.shocks(n = markets)
-)
+alpha <- rnorm(1, 15, 2)
+delta <- -exp(rnorm(1, 0, 1))
+gamma <- rnorm(1, -2, 1)
+psi <- exp(rnorm(1, 0, 1))
+xi_d <- rnorm(Markets)
+xi_s <- rnorm(Markets)
+supply_instrument <- xi_s + rnorm(Markets)
+prices <- rep(0, Markets)
 
-for (market in markets) {
-  find.market.price(price = prices[market])
+while(sum(abs(demand(alpha, delta, prices, xi_d) - 
+              supply(gamma, psi, prices, xi_s))) > 0.01) {
+  prices <- prices + 0.1*(demand(alpha, delta, prices, xi_d) - 
+                            supply(gamma, psi, prices, xi_s))
 }
 
 
